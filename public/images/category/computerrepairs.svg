@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" id="Computer_Repairs" width="28" height="28" viewBox="0 0 28 28">
+    <defs>
+        <style>
+            .cls-1{fill:none}
+        </style>
+    </defs>
+    <path id="Rectangle_91" d="M0 0h28v28H0z" class="cls-1"/>
+    <g id="daily-needs-icn" transform="translate(2 3)">
+        <path id="Rectangle_91-2" d="M0 0h22v22H0z" class="cls-1" transform="translate(1)"/>
+        <g id="monitor" transform="translate(1)">
+            <path id="Path_13928" fill="#ffc100" d="M30.985 259.2v1.806a2.037 2.037 0 0 1-2.03 2.046H12.03a2.037 2.037 0 0 1-2.03-2.047V259.2zm0 0" transform="translate(-9.493 -245.953)"/>
+            <path id="Path_13929" fill="#fbfbfb" d="M30.985 12.347v10.688H10V12.347a2.037 2.037 0 0 1 2.03-2.047h16.931a2.037 2.037 0 0 1 2.025 2.047zm0 0" transform="translate(-9.493 -9.789)"/>
+            <path id="Path_13930" fill="#f2f2f2" d="M20.016 10.3H12.03A2.037 2.037 0 0 0 10 12.347v10.688h10.021V10.3zm0 0" transform="translate(-9.493 -9.789)"/>
+            <path id="Path_13931" fill="#efb70a" d="M20.016 259.2H10v1.806a2.037 2.037 0 0 0 2.03 2.046h7.991V259.2zm0 0" transform="translate(-9.493 -245.953)"/>
+            <path id="Path_13932" fill="#333a60" d="M19.463.3H2.537A2.549 2.549 0 0 0 0 2.859v12.494a2.549 2.549 0 0 0 2.537 2.558h7.956v3.367H6.809a.512.512 0 0 0 0 1.023h8.625a.512.512 0 0 0 0-1.023h-3.927v-3.367h7.956A2.549 2.549 0 0 0 22 15.353V2.859A2.549 2.549 0 0 0 19.463.3zM2.537 1.324h16.931a1.533 1.533 0 0 1 1.522 1.535v10.176H1.015V2.859a1.53 1.53 0 0 1 1.522-1.535zm16.926 15.564H2.537a1.533 1.533 0 0 1-1.522-1.535v-1.295H20.99v1.294a1.534 1.534 0 0 1-1.527 1.535zm0 0" transform="translate(0 -.301)"/>
+        </g>
+    </g>
+</svg>

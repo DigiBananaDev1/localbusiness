@@ -1,0 +1,65 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="28" height="28" viewBox="0 0 28 28">
+  <defs>
+    <style>
+      .cls-1 {
+        fill: none;
+      }
+
+      .cls-2 {
+        clip-path: url(#clip-path);
+      }
+
+      .cls-3 {
+        fill: #8d6e63;
+      }
+
+      .cls-4 {
+        fill: #6d4c41;
+      }
+
+      .cls-5 {
+        fill: #388e3c;
+      }
+
+      .cls-6 {
+        fill: #1b5e20;
+      }
+
+      .cls-7 {
+        fill: #9ccc65;
+      }
+
+      .cls-8 {
+        fill: #7cb342;
+      }
+
+      .cls-9 {
+        fill: #4caf50;
+      }
+
+      .cls-10 {
+        fill: #3c3b5c;
+      }
+    </style>
+    <clipPath id="clip-path">
+      <rect id="Rectangle_71413" data-name="Rectangle 71413" class="cls-1" width="28" height="28" transform="translate(7965 -157)"/>
+    </clipPath>
+  </defs>
+  <g id="Furniture" transform="translate(-7965 157)">
+    <g id="Mask_Group_13945" data-name="Mask Group 13945" class="cls-2">
+      <g id="Sofa" transform="translate(7966.9 -158.1)">
+        <path id="Path_41229" data-name="Path 41229" class="cls-3" d="M7,36H8.925v1.882H7Z" transform="translate(-2.594 -15.353)"/>
+        <path id="Path_41230" data-name="Path 41230" class="cls-4" d="M37,36h1.925v1.882H37Z" transform="translate(-18.155 -15.353)"/>
+        <path id="Path_41231" data-name="Path 41231" class="cls-5" d="M6,20.235V9.882A1.906,1.906,0,0,1,7.925,8H21.4a1.906,1.906,0,0,1,1.925,1.882V20.235Z" transform="translate(-2.075 -0.529)"/>
+        <path id="Path_41232" data-name="Path 41232" class="cls-6" d="M27,8H24V20.235h3.863V9.882C27.863,8.843,27.479,8,27,8Z" transform="translate(-6.612 -0.529)"/>
+        <path id="Path_41233" data-name="Path 41233" class="cls-7" d="M9,22H23.439v3.765H9Z" transform="translate(-3.631 -7.941)"/>
+        <path id="Path_41234" data-name="Path 41234" class="cls-8" d="M24,22h3.791v3.765H24Z" transform="translate(-6.612 -7.941)"/>
+        <path id="Path_41235" data-name="Path 41235" class="cls-9" d="M3,25.412v-8a1.444,1.444,0,0,1,2.888,0v5.176H20.326V17.412a1.444,1.444,0,0,1,2.888,0v8Z" transform="translate(-0.519 -4.765)"/>
+        <path id="Path_41236" data-name="Path 41236" class="cls-5" d="M31.4,16a1.333,1.333,0,0,0-1.234,1.412v5.176H24v2.824h8.637v-8A1.333,1.333,0,0,0,31.4,16Z" transform="translate(-9.942 -4.765)"/>
+        <path id="Subtraction_25" data-name="Subtraction 25" class="cls-10" d="M-8047.206-1298.882h-20.211a.377.377,0,0,1-.383-.37v-8a1.788,1.788,0,0,1,1.367-1.725l.077-.02v-1.549a2.288,2.288,0,0,1,2.306-2.254h13.475a2.286,2.286,0,0,1,2.306,2.254V-1309l.075.02a1.788,1.788,0,0,1,1.371,1.725v8A.377.377,0,0,1-8047.206-1298.882Zm-18.77-9.413a1.054,1.054,0,0,0-1.063,1.043v7.629h19.453v-7.629a1.054,1.054,0,0,0-1.063-1.043,1.054,1.054,0,0,0-1.063,1.043v5.177a.374.374,0,0,1-.378.369h-14.441a.375.375,0,0,1-.38-.369v-5.177A1.054,1.054,0,0,0-8065.976-1308.295Zm1.827,2.825v3.023h13.675v-3.023Zm.1-6.589a1.533,1.533,0,0,0-1.545,1.513V-1309l.075.02a1.789,1.789,0,0,1,1.371,1.725v1.041h13.675v-1.041a1.788,1.788,0,0,1,1.367-1.725l.077-.02v-1.549a1.531,1.531,0,0,0-1.545-1.513Z" transform="translate(8069.9 1319.9)"/>
+        <path id="Subtraction_26" data-name="Subtraction 26" class="cls-10" d="M-8065.494-1310.176h-1.925a.376.376,0,0,1-.381-.37v-1.883a.376.376,0,0,1,.381-.371h1.925a.376.376,0,0,1,.381.371v1.883A.376.376,0,0,1-8065.494-1310.176Zm-1.542-1.883v1.142h1.162v-1.142Z" transform="translate(8071.825 1333.077)"/>
+        <path id="Subtraction_27" data-name="Subtraction 27" class="cls-10" d="M-8065.494-1310.176h-1.925a.376.376,0,0,1-.381-.37v-1.883a.376.376,0,0,1,.381-.371h1.925a.376.376,0,0,1,.381.371v1.883A.376.376,0,0,1-8065.494-1310.176Zm-1.542-1.883v1.142h1.162v-1.142Z" transform="translate(8086.264 1333.077)"/>
+      </g>
+    </g>
+  </g>
+</svg>
