@@ -7,11 +7,46 @@ use Illuminate\Support\Str;
 
 class Category extends Model
 {
-    protected $fillable =[
+    protected $fillable = [
         'name',
         'image',
         'slug',
+        'parent_id'
     ];
+
+
+    public function parent()
+    {
+        return $this->belongsTo(Category::class, 'parent_id');
+    }
+
+    // public function children()
+    // {
+    //     return $this->hasMany(Category::class, 'parent_id');
+    // }
+
+    // // public function products()
+    // // {
+    // //     return $this->hasMany(Product::class);
+    // // }
+    // public function products()
+    // {
+    //     return $this->belongsToMany(Product::class, 'category_product');
+    // }
+
+
+    public function children()
+    {
+        return $this->hasMany(Category::class, 'parent_id')->with('children');
+    }
+
+    public function products()
+    {
+        return $this->hasMany(Product::class);
+    }
+
+
+
 
     public static function boot()
     {

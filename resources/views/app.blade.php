@@ -49,117 +49,213 @@
     {{-- HEADER CSS --}}
 
     <style>
+        /* --- NAVBAR & SEARCH SECTION (INDIAMART STYLE) --- */
         .navbar {
-            padding-top: 0.75rem;
-            padding-bottom: 0.75rem;
-            z-index: 1;
+            background: white !important;
+            box-shadow: none;
+            padding-top: 0.5rem;
+            padding-bottom: 0.5rem;
         }
 
-        .nav-link {
-            color: #4a5568;
-            font-size: 0.95rem;
-            padding: 0.5rem 1rem !important;
-            transition: all 0.3s ease;
+        .navbar .navbar-brand {
+            margin-right: 1.5rem;
         }
 
-
-        .navbar-brand p {
-            font-weight: 800;
-            letter-spacing: 0.5px;
-            font-size: 35px;
+        .navbar .navbar-brand img {
+            max-width: 250px;
+            height: auto;
         }
 
-
-
-        .navbar-brand span {
-            color: orangered;
-        }
-
-
-
-        .nav-link:hover {
-            color: var(--bs-primary);
-        }
-
-        .nav-link.active {
-            color: var(--bs-primary);
-            font-weight: 500;
-        }
-
-        .nav-link i {
-            font-size: 1.1rem;
-            width: 1.25rem;
-            text-align: center;
-        }
-
-        .dropdown-menu {
-            padding: 0.5rem 0;
+        .search-section {
+            max-width: 600px;
+            width: 100%;
+            margin: 0 auto;
+            background: transparent;
             border: none;
-            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
         }
 
-        .dropdown-item {
-            padding: 0.5rem 1.5rem;
-            font-size: 0.9rem;
-            transition: all 0.2s ease;
+        .search-section .input-group {
+            width: 100%;
         }
 
-        .dropdown-item:hover {
-            background-color: rgba(var(--bs-primary-rgb), 0.1);
-            color: white;
+        .search-section .input-group-text {
+            background: #fff;
+            border: none;
+            font-size: 1.2rem;
         }
 
-        .dropdown-item i {
+        .search-section select.form-select {
+            border: none;
+            background: transparent;
+            outline: none;
             font-size: 1rem;
-            width: 1.25rem;
-            text-align: center;
+            color: #333;
+            min-width: 100px;
+            box-shadow: none;
         }
 
-        .btn i {
+        .search-section input[type="text"],
+        .search-section .form-control {
+            border: none;
+            background: transparent;
+            outline: none;
             font-size: 1rem;
+            color: #333;
+            box-shadow: none;
+        }
+
+        .search-section input[type="text"]:focus,
+        .search-section .form-control:focus,
+        .search-section select.form-select:focus {
+            box-shadow: none;
+            outline: none;
+        }
+
+        .search-section button[type="submit"] {
+            background: #f79321;
+            color: #fff;
+            border: none;
+            border-radius: 0 2rem 2rem 0;
+            min-width: 44px;
+            min-height: 44px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+            transition: background 0.2s;
+            box-shadow: 0 2px 8px rgba(247, 147, 33, 0.08);
+        }
+
+        .search-section button[type="submit"]:hover {
+            background: #d96d00;
+        }
+
+        /* Right bar section */
+        .navbar-nav {
+            align-items: right;
+        }
+
+        .navbar-nav .nav-item {
+            margin-left: 0.5rem;
+            margin-right: 0.5rem;
+        }
+
+        .navbar-nav .nav-link {
+            background: none !important;
+            color: #d96d00 !important;
+            border-radius: 0.3rem;
+            padding: 0.3rem 0.7rem !important;
+            font-weight: 500;
+            display: flex;
+            align-items: center;
+            gap: 0.3rem;
+            font-size: 1rem;
+            transition: background 0.2s, color 0.2s;
+        }
+
+        .navbar-nav .nav-link:hover,
+        .navbar-nav .nav-link:focus {
+            background: #f79321 !important;
+            color: #fff !important;
+        }
+
+        .navbar-nav .nav-link i {
+            font-size: 1.2rem;
+        }
+
+        .navbar-nav .loginbtn .nav-link {
+            background: #fff !important;
+            color: #1f85c7 !important;
+            font-weight: 700;
+        }
+
+        .navbar-nav .loginbtn .nav-link:hover {
+            background: #f79321 !important;
+            color: #fff !important;
+        }
+
+        .navbar-nav .dropdown-menu {
+            min-width: 180px;
+            border-radius: 1rem;
+            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.10);
+        }
+
+        .navbar-nav .dropdown-item {
+            border-radius: 1rem;
+            margin: 0.2rem 0;
         }
 
         @media (max-width: 991.98px) {
-            .navbar-nav {
-                padding: 1rem 0;
+            .navbar-nav .nav-item {
+                margin: 0.25rem 0;
             }
 
-            .nav-item {
-                padding: 0.25rem 0;
+            .navbar-nav .nav-link {
+                width: 100%;
+                justify-content: flex-start;
             }
 
-            .nav-link {
-                padding: 0.5rem 0 !important;
-            }
-
-            .nav-link i {
-                width: 2rem;
+            .search-section {
+                min-width: 0;
+                max-width: 100%;
             }
         }
 
-        .list {
-            background: orangered;
+        @media (max-width: 600px) {
+            .navbar .navbar-brand img {
+                max-width: 110px;
+            }
+
+            .search-section {
+                flex-direction: column;
+                border-radius: 0.5rem;
+                width: 100%;
+                margin: 0.5rem 0;
+            }
+        }
+
+        
+        /* FAQ */
+
+
+        .faq-section {
+            background: white;
+            border-radius: 0px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            padding: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .faq-item {
+            border-bottom: 1px solid #eee;
+            padding: 1rem 0;
+        }
+
+        .faq-question {
             font-weight: 600;
+            color: #2c3e50;
+            cursor: pointer;
         }
 
 
-        @media only screen and (max-width: 600px) {
-
-
-            .list {
-                width: 200px;
-                margin-bottom: 10px;
-            }
-
-            .loginbtn {
-                width: 230px;
-                margin-left: -10px;
-            }
-
+        .faq-section h3 {
+            color: #1f85c7;
         }
 
 
-        /* PREFOOTER */
+        .faq-answer {
+            color: #666;
+            margin-top: 0.5rem;
+            font-weight: 400;
+        }
+
+        .ask-question-section {
+            background: #f8f9fa;
+            padding: 3rem 0;
+            border-radius: 0px !important;
+            margin-top: 2rem;
+        }
+          /* PREFOOTER */
 
         .category-link {
             color: #333;
@@ -189,7 +285,7 @@
             margin: 2rem 0;
         }
 
-        /* FOOTER */
+          /* FOOTER */
 
         a {
             text-decoration: none;
@@ -207,7 +303,7 @@
         }
 
         .footer-section {
-            background-color: #1A1A6C;
+            background-color: #1f85c7;
             position: relative;
             overflow: hidden;
             z-index: 9;
@@ -284,7 +380,7 @@
         }
 
         .small-post-item .post-date {
-            color: #ffb606;
+            color: #f79321;
             margin-bottom: 3px;
             font-family: var(--para-font);
             font-weight: 400;
@@ -394,143 +490,80 @@
 
         }
 
-        /* FAQ */
-
-
-        .faq-section {
-            background: white;
-            border-radius: 0px;
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-            padding: 2rem;
-            margin-bottom: 2rem;
-        }
-
-        .faq-item {
-            border-bottom: 1px solid #eee;
-            padding: 1rem 0;
-        }
-
-        .faq-question {
-            font-weight: 600;
-            color: #2c3e50;
-            cursor: pointer;
-        }
-
-
-        .faq-section h3 {
-            color: #0D6EFD;
-        }
-
-
-        .faq-answer {
-            color: #666;
-            margin-top: 0.5rem;
-            font-weight: 400;
-        }
-
-        .ask-question-section {
-            background: #f8f9fa;
-            padding: 3rem 0;
-            border-radius: 0px !important;
-            margin-top: 2rem;
-        }
     </style>
 
 </head>
 
 <body>
 
-    <!-- Topbar -->
-    <div class="bg-primary text-white py-2 border-bottom">
-        <div class="container-fluid">
-            <div class="d-flex justify-content-between align-items-center">
-
-                <!-- Left: Social Media -->
-                <div class="d-flex gap-3 ">
-                    <a href="#" class="text-white"><i class="bi bi-facebook"></i></a>
-                    <a href="#" class="text-white"><i class="bi bi-twitter-x"></i></a>
-                    <a href="#" class="text-white"><i class="bi bi-instagram"></i></a>
-                </div>
-
-                <!-- Center: Text -->
-                <div class="text-center fw-bold  fs-5 d-none d-md-block">
-                    From Launch to Leadership – We’ve Got You Covered
-                </div>
-
-                <!-- Right: Help Dropdown -->
-                <div class="dropdown bg-transparent text-white">
-                    <a href="#" class="text-dark dropdown-toggle d-flex align-items-center text-white fw-bold"
-                        data-bs-toggle="dropdown">
-                        <i class="bi bi-headset p-1"></i>Help
-                    </a>
-                    <ul class="dropdown-menu dropdown-menu-end">
-                        <li><a role="button" class="text-dark btn-sm px-3 d-flex align-items-center"
-                                data-bs-toggle="modal" data-bs-target="#ContactUsModal">
-                                <i class="bi bi-headset p-1"></i>
-                                <span class="ms-2">Contact-Us</span>
-                            </a>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-    </div>
-
+    {{-- HEADER START --}}
     <nav class="navbar navbar-expand-lg navbar-light bg-white shadow-sm">
         <div class="container-fluid">
-            <a class="navbar-brand fw-bold text-primary d-flex align-items-center" href="{{ url('/') }}">
+            <a class="navbar-brand fw-bold text-primary d-flex align-items-center" href="{{url('/')}}">
 
-                <P>LOCAL <span>BUSINESS</span></P>
+                <img src="{{asset('public/assets/img/mlb.png')}}" alt="" width="250px">
             </a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
                 data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
                 aria-label="Toggle navigation">
-                <svg width="25px" height="25px" viewBox="0 0 24 24" fill="none"
-                    xmlns="http://www.w3.org/2000/svg">
+                <svg width="25px" height="25px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <path d="M3 12H21M3 6H21M9 18H21" stroke="currentColor" stroke-width="2" stroke-linecap="round"
                         stroke-linejoin="round" />
                 </svg>
             </button>
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <!-- Main Navigation Links -->
-                <form action="{{ route('search') }}" method="POST"
-                    class="d-flex flex-wrap justify-content-center gap-2 mx-5">
+                <form action="{{ route('search') }}" method="POST" class="search-section mx-auto">
                     @csrf
-
-                    <select name="city" class="form-select" style="width: 150px;">
-                        <option value="">All City</option>
-                        @foreach ($cities as $city)
-                            <option value="{{ $city->city }}">{{ $city->city }}</option>
-                        @endforeach
-                    </select>
-
-                    <input type="text" name="search_text" class="form-control" id="searchInput" placeholder=""
-                        style="width: 410px; max-width: 100%;" />
-                    <button type="submit" class="btn p-0 border-0 position-absolute searchbtn"
-                        style="left: 68%; top: 50%; transform: translateY(-50%); background: transparent; color: #888;">
-                        <i class="fa fa-search"></i>
-                    </button>
-
+                    <div class="input-group flex-nowrap align-items-center"
+                        style="background: #fff; border-radius: 2rem; box-shadow: 0 2px 8px rgba(0,0,0,0.07); padding: 0.15rem 0.3rem;">
+                        <span class="input-group-text bg-white border-0 px-2" style="border-radius: 2rem 0 0 2rem;">
+                            <i class="fa fa-map-marker text-primary"></i>
+                        </span>
+                        <select name="city" class="form-select border-0"
+                            style="max-width: 120px; background: transparent;">
+                            <option value="">All City</option>
+                            @foreach ($cities as $city)
+                                <option value="{{ $city->city }}">{{ $city->city }}</option>
+                            @endforeach
+                        </select>
+                        <input type="text" name="search_text" class="form-control border-0" id="searchInput"
+                            placeholder="Search for businesses, services..." style="background: transparent;" />
+                        <button type="submit" class="btn d-flex align-items-center justify-content-center"
+                            style="background: #f79321; color: #fff; border-radius: 0 2rem 2rem 0; min-width: 44px; min-height: 44px; box-shadow: 0 2px 8px rgba(247,147,33,0.08);">
+                            <i class="fa fa-search"></i>
+                        </button>
+                    </div>
                 </form>
 
                 <!-- Right Side Links -->
                 <ul class="navbar-nav ms-auto mb-2 mb-lg-0 align-items-center">
-                    <li class="nav-item me-3">
+                    {{-- <li class="nav-item me-3">
                         <a class="nav-link list btn  text-white btn-sm px-3 d-flex align-items-center"
-                            href="{{ url('/list-your-bussiness') }}">
+                            href="{{url('/list-your-bussiness')}}">
                             <i class="bi bi-plus-circle"></i>
                             <span class="ms-2">List Your Business</span>
                         </a>
+                    </li> --}}
+                    <li class="nav-item me-3">
+                        <a href="#" class="nav-link   text-white btn-sm px-3 d-flex align-items-center"><i
+                                class="fa-solid fa-shop me-2"></i>Selll</a>
                     </li>
+
+                    <li class="nav-item me-3">
+                        <a href="#" class="nav-link   text-white btn-sm px-3 d-flex align-items-center"><i
+                                class="fa-solid fa-question me-2"></i>Help</a>
+                    </li>
+
+
                     @if (Auth::guard('web')->check())
                         <li class="nav-item dropdown">
-                            <a class="nav-link p-0 d-flex align-items-center" id="navbarDropdown" href="#"
-                                role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            <a class="nav-link p-0 d-flex align-items-center" id="navbarDropdown" href="#" role="button"
+                                data-bs-toggle="dropdown" aria-expanded="false">
                                 <i class="fa fa-user-circle fs-4 text-primary"></i>
                                 <i class="bi bi-chevron-down ms-2"></i>
                             </a>
-                            <ul class="dropdown-menu dropdown-menu-end shadow-sm border-0"
-                                aria-labelledby="navbarDropdown">
+                            <ul class="dropdown-menu dropdown-menu-end shadow-sm border-0" aria-labelledby="navbarDropdown">
                                 <li>
                                     <a class="dropdown-item d-flex align-items-center"
                                         href="{{ route('showUserQueries', Auth::guard('web')->user()->id) }}">
@@ -542,11 +575,9 @@
                                     <hr class="dropdown-divider">
                                 </li>
                                 <li>
-                                    <form action="{{ route('user.logout') }}" method="POST"
-                                        style="display: inline;">
+                                    <form action="{{ route('user.logout') }}" method="POST" style="display: inline;">
                                         @csrf
-                                        <button type="submit"
-                                            class="dropdown-item d-flex align-items-center text-danger">
+                                        <button type="submit" class="dropdown-item d-flex align-items-center text-danger">
                                             <i class="bi bi-box-arrow-right"></i>
                                             <span class="ms-2">Logout</span>
                                         </button>
@@ -556,12 +587,12 @@
                         </li>
                     @else
                         <li class="nav-item loginbtn">
-                            {{-- <button type="button" class="btn btn-primary btn-sm px- d-flex align-items-center" data-bs-toggle="modal" data-bs-target="#loginModal">
-                            <i class="bi bi-person"></i>
-                            <span class="ms-2">Login</span>
-                        </button> --}}
-                            <a role="button"
-                                class="nav-link btn-primary  text-white btn-sm px-3 d-flex align-items-center"
+                            {{-- <button type="button" class="btn btn-primary btn-sm px- d-flex align-items-center"
+                                data-bs-toggle="modal" data-bs-target="#loginModal">
+                                <i class="bi bi-person"></i>
+                                <span class="ms-2">Login</span>
+                            </button> --}}
+                            <a role="button" class="nav-link   text-white btn-sm px-3 d-flex align-items-center"
                                 data-bs-toggle="modal" data-bs-target="#loginModal">
                                 <i class="bi bi-person"></i>
                                 <span class="ms-2">Login</span>
@@ -572,21 +603,20 @@
             </div>
         </div>
     </nav>
+{{-- LOGIN MODAL --}}
     <div>
         <!-- Login Modal -->
-        <div class="modal fade" id="loginModal" tabindex="-1" aria-labelledby="loginModalLabel"
-            aria-hidden="true">
+        <div class="modal fade" id="loginModal" tabindex="-1" aria-labelledby="loginModalLabel" aria-hidden="true">
             <div class="modal-dialog modal-dialog-centered modal-lg"> <!-- modal-lg makes it wider -->
                 <div class="modal-content">
                     <div class="modal-header">
                         <h5 class="modal-title" id="loginModalLabel">Login</h5>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal"
-                            aria-label="Close"></button>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body">
                         <div id="loginFormDiv">
-                            <form class="form-with-loader" action="{{ route('user.sendOtp') }}" id="loginForm"
-                                method="POST" enctype="multipart/form-data">
+                            <form action="{{ route('user.sendOtp') }}" id="loginForm" method="POST"
+                                enctype="multipart/form-data">
                                 @csrf
 
                                 <div class="form-floating mb-3">
@@ -596,32 +626,19 @@
                                 </div>
 
                                 <div class="text-center mt-4 mb-0">
-                                    <button type="submit" id="sendOtp"
-                                        class="btn btn-primary submit-btn-with-loader"
-                                        data-loading-text="Sending Otp...">
-                                        <span class="btn-text">Send Otp</span>
-                                        <span class="btn-spinner spinner-border spinner-border-sm d-none"
-                                            role="status"></span>
-                                    </button>
-                                    {{-- <button type="button" id="sendOtp" class="btn btn-primary">Send Otp</button> --}}
+                                    <button type="button" id="sendOtp" class="btn btn-primary">Send Otp</button>
                                 </div>
                             </form>
                         </div>
                         <div id="otpForm" style="display: none;">
-                            <form class="form-with-loader" method="POST" action="{{ route('user.loginSubmit') }}">
+                            <form method="POST" action="{{ route('user.loginSubmit') }}">
                                 @csrf
                                 <div class="form-floating mb-3">
                                     <input class="form-control" id="otp" name="otp" type="text" />
                                     <label for="otp">Enter OTP</label>
                                 </div>
                                 <div class="text-center mt-4 mb-0">
-                                    <button type="submit" class="btn btn-primary submit-btn-with-loader"
-                                        data-loading-text="Verify Otp...">
-                                        <span class="btn-text">Login</span>
-                                        <span class="btn-spinner spinner-border spinner-border-sm d-none"
-                                            role="status"></span>
-                                    </button>
-                                    {{-- <button type="submit" class="btn btn-primary">Login</button> --}}
+                                    <button type="submit" class="btn btn-primary">Login</button>
                                 </div>
                             </form>
                         </div>
@@ -644,8 +661,7 @@
                 <div class="modal-content">
                     <div class="modal-header">
                         <h5 class="modal-title" id="registerModalLabel">Register</h5>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal"
-                            aria-label="Close"></button>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body">
                         <div id="registerFormDiv">
@@ -655,24 +671,24 @@
 
                                 <div class="form-floating mb-3">
                                     <input class="form-control" id="name" name="name" type="name"
-                                        value="{{ old('name') }}" />
+                                        value="{{old('name')}}" />
                                     <label for="name">Name</label>
                                 </div>
                                 <div class="form-floating mb-3">
                                     <input class="form-control" id="mobile" name="mobile" type="number"
-                                        value="{{ old('mobile') }}" />
+                                        value="{{old('mobile')}}" />
                                     <label for="mobile">Mobile Number</label>
                                     <small class="reg-mobile-error alert alert-danger p-2 d-block mt-2 d-none"></small>
                                 </div>
                                 <div class="form-floating mb-3">
                                     <input class="form-control" id="regEmail" name="email" type="email"
-                                        value="{{ old('email') }}" />
+                                        value="{{old('email')}}" />
                                     <label for="regEmail">Email address</label>
                                     <small class="reg-email-error alert alert-danger p-2 d-block mt-2 d-none"></small>
                                 </div>
                                 <div class="form-floating mb-3 d-none">
                                     <input class="form-control" id="regOtp" name="otp" type="number"
-                                        value="{{ old('otp') }}" />
+                                        value="{{old('otp')}}" />
                                     <label for="regOtp">Otp</label>
                                     @error('otp')
                                         <small class="alert alert-danger p-2 d-block mt-2">{{ $message }}</small>
@@ -710,10 +726,9 @@
                 <div class="col-md-12">
                     <div class="faq-section">
                         <!-- <h3 class="mb-4">Customer</h3> -->
-                        @foreach ($faqs as $faq)
+                        @foreach($faqs as $faq)
                             <div class="faq-item">
-                                <div class="faq-question" data-bs-toggle="collapse"
-                                    data-bs-target="#faq{{ $faq->id }}">
+                                <div class="faq-question" data-bs-toggle="collapse" data-bs-target="#faq{{ $faq->id }}">
                                     {{ $faq->question }}
                                     <i class="fas fa-chevron-down float-end"></i>
                                 </div>
@@ -754,8 +769,8 @@
                     <div class="col-lg-3 col-md-4 col-sm-6 col-6">
                         @foreach ($chunk as $category)
                             <div class="d-flex align-items-center ">
-                                <img src="{{ asset('public/images/category/' . $category->image) }}"
-                                    alt="Category image" width="25" height="25" class="me-2 rounded">
+                                <img src="{{ asset('public/images/category/' . $category->image) }}" alt="Category image"
+                                    width="25" height="25" class="me-2 rounded">
                                 <a href="{{ route('venders', $category['id']) }}" class="category-link">
                                     {{ $category['name'] }}
                                 </a>
@@ -774,8 +789,7 @@
                 <div class="row">
                     <div class="col-lg-4 col-md-6 col-sm-6">
                         <div class="widget company-intro-widget">
-                            <a class="navbar-brand fw-bold text-primary d-flex align-items-center"
-                                href="{{ url('/') }}">
+                            <a class="navbar-brand fw-bold text-primary d-flex align-items-center" href="{{url('/')}}">
 
                                 <P>LOCAL <span>BUSINESS</span></P>
                             </a>
@@ -792,10 +806,9 @@
                         <div class="widget course-links-widget">
                             <h5 class="widget-title">HELPFUL LINKS</h5>
                             <ul class="courses-link-list">
-                                <li><a href="{{ url('/') }}"><i class="fas fa-long-arrow-alt-right"></i>Home</a>
+                                <li><a href="{{ url('/') }}"><i class="fas fa-long-arrow-alt-right"></i>Home</a></li>
+                                <li><a href="{{ route('about') }}"><i class="fas fa-long-arrow-alt-right"></i>About</a>
                                 </li>
-                                <li><a href="{{ route('about') }}"><i
-                                            class="fas fa-long-arrow-alt-right"></i>About</a></li>
                                 <li><a href="#faq"><i class="fas fa-long-arrow-alt-right"></i>Faq</a></li>
                                 <li><a href="{{ route('privacyPolicy') }}" target="_blank"><i
                                             class="fas fa-long-arrow-alt-right"></i>Privacy Policy</a></li>
@@ -809,15 +822,15 @@
                                 <li>
                                     <div class="small-post-item">
                                         <a href="#" class="post-date">July 18, 2018</a>
-                                        <h6 class="small-post-title"><a href="#">Lorem Ipsum is simply dummy
-                                                text of the printing.</a></h6>
+                                        <h6 class="small-post-title"><a href="#">Lorem Ipsum is simply dummy text of the
+                                                printing.</a></h6>
                                     </div>
                                 </li><!-- small-post-item end -->
                                 <li>
                                     <div class="small-post-item">
                                         <a href="#" class="post-date">July 28, 2018</a>
-                                        <h6 class="small-post-title"><a href="#">Lorem Ipsum is simply dummy
-                                                text of the printing</a></h6>
+                                        <h6 class="small-post-title"><a href="#">Lorem Ipsum is simply dummy text of the
+                                                printing</a></h6>
                                     </div>
                                 </li><!-- small-post-item end -->
                             </ul>
@@ -847,8 +860,7 @@
                     </div>
                     <div class="col-md-6 col-sm-6">
                         <ul class="terms-privacy d-flex justify-content-sm-end justify-content-center">
-                            <li><a href="{{ route('termsAndConditions') }}" target="_blank">Terms & Conditions</a>
-                            </li>
+                            <li><a href="{{ route('termsAndConditions') }}" target="_blank">Terms & Conditions</a></li>
                             <li><a href="{{ route('privacyPolicy') }}" target="_blank">Privacy Policy</a></li>
                         </ul>
                     </div>
@@ -901,12 +913,12 @@
     </div>
 
     <!-- Toaster for messages like success or error  -->
-    @if (session('success'))
+    @if(session('success'))
         @php
             $successMessage = str_replace("'", "\\'", session('success'));
         @endphp
         <script>
-            document.addEventListener('DOMContentLoaded', function() {
+            document.addEventListener('DOMContentLoaded', function () {
                 toastr.success('{!! $successMessage !!}', 'Success', {
                     closeButton: true,
                     progressBar: true,
@@ -919,7 +931,7 @@
             $errorMessage = str_replace("'", "\\'", session('error'));
         @endphp
         <script>
-            document.addEventListener('DOMContentLoaded', function() {
+            document.addEventListener('DOMContentLoaded', function () {
                 toastr.error('{!! $errorMessage !!}', 'Error', {
                     closeButton: true,
                     progressBar: true,
@@ -931,7 +943,7 @@
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous">
-    </script>
+        </script>
     <!-- jQuery -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 
@@ -960,24 +972,24 @@
         }, 3000);
     </script>
     <script>
-        document.getElementById('sendRegOtp').addEventListener('click', function(e) {
+        document.getElementById('sendRegOtp').addEventListener('click', function (e) {
             const regForm = document.getElementById('registerForm');
             const name = regForm.name.value;
             const email = regForm.email.value;
             const mobile = regForm.mobile.value;
 
             fetch("{{ route('user.sendRegOtp') }}", {
-                    method: "POST",
-                    headers: {
-                        "Content-Type": "application/json",
-                        "X-CSRF-TOKEN": "{{ csrf_token() }}"
-                    },
-                    body: JSON.stringify({
-                        email: email,
-                        name: name,
-                        mobile: mobile
-                    })
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                    "X-CSRF-TOKEN": "{{ csrf_token() }}"
+                },
+                body: JSON.stringify({
+                    email: email,
+                    name: name,
+                    mobile: mobile
                 })
+            })
                 .then(res => {
                     if (!res.ok) throw res;
                     return res.json();
@@ -1007,7 +1019,7 @@
                 });
         });
 
-        document.getElementById('sendOtp').addEventListener('click', function(e) {
+        document.getElementById('sendOtp').addEventListener('click', function (e) {
             // const loginForm = document.getElementById('loginForm');
 
             //both ways of getting email are correct
@@ -1015,15 +1027,15 @@
             // const email = loginForm.email.value;
 
             fetch("{{ route('user.sendOtp') }}", {
-                    method: "POST",
-                    headers: {
-                        "Content-Type": "application/json",
-                        "X-CSRF-TOKEN": "{{ csrf_token() }}"
-                    },
-                    body: JSON.stringify({
-                        email
-                    })
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                    "X-CSRF-TOKEN": "{{ csrf_token() }}"
+                },
+                body: JSON.stringify({
+                    email
                 })
+            })
                 .then(res => {
                     if (!res.ok) throw res;
                     return res.json();
@@ -1045,13 +1057,13 @@
         });
     </script>
     <script>
-        $(function() {
+        $(function () {
             $('[data-toggle="tooltip"]').tooltip();
         });
     </script>
     @if ($errors->any() && session('modal_open'))
         <script>
-            window.onload = function() {
+            window.onload = function () {
                 var registerModal = new bootstrap.Modal(document.getElementById('registerModal'));
                 registerModal.show();
                 document.getElementById('regOtp').parentElement.classList.remove('d-none');
@@ -1098,9 +1110,9 @@
 
         // OWL CAROUSLE
 
-        $(document).ready(function() {
+        $(document).ready(function () {
             $(".full-screen-carousel").owlCarousel({
-                items: 1, // Number of items per slide
+                items: 1,            // Number of items per slide
                 margin: 10,
                 loop: true,
                 nav: true,
@@ -1108,24 +1120,18 @@
                 dots: false,
                 autoplayTimeout: 3000,
                 responsive: {
-                    0: {
-                        items: 1
-                    },
-                    576: {
-                        items: 1
-                    },
-                    768: {
-                        items: 1
-                    }
+                    0: { items: 1 },
+                    576: { items: 1 },
+                    768: { items: 1 }
                 }
             });
         });
 
 
 
-        $(document).ready(function() {
+        $(document).ready(function () {
             $(".top-rank").owlCarousel({
-                items: 6, // Number of items per slide
+                items: 6,            // Number of items per slide
                 margin: 10,
                 loop: true,
                 nav: true,
@@ -1133,21 +1139,15 @@
                 dots: true,
                 autoplayTimeout: 3000,
                 responsive: {
-                    0: {
-                        items: 1
-                    },
-                    576: {
-                        items: 1
-                    },
-                    768: {
-                        items: 6
-                    }
+                    0: { items: 1 },
+                    576: { items: 1 },
+                    768: { items: 6 }
                 }
             });
         });
 
 
-        $(document).ready(function() {
+        $(document).ready(function () {
             $(".brand-carousel").owlCarousel({
                 loop: true,
                 margin: 20,
@@ -1155,42 +1155,17 @@
                 autoplay: true,
                 autoplayTimeout: 2000,
                 responsive: {
-                    0: {
-                        items: 2
-                    },
-                    576: {
-                        items: 3
-                    },
-                    768: {
-                        items: 4
-                    },
-                    992: {
-                        items: 5
-                    },
-                    1200: {
-                        items: 6
-                    }
+                    0: { items: 2 },
+                    576: { items: 3 },
+                    768: { items: 4 },
+                    992: { items: 5 },
+                    1200: { items: 6 }
                 }
             });
         });
-    </script>
 
-    {{-- loading Button after Submitting Form --}}
 
-    <script>
-        document.querySelectorAll('.form-with-loader').forEach(form => {
-            form.addEventListener('submit', function() {
-                const submitBtn = form.querySelector('.submit-btn-with-loader');
-                const btnText = submitBtn.querySelector('.btn-text');
-                const btnSpinner = submitBtn.querySelector('.btn-spinner');
 
-                const loadingText = submitBtn.dataset.loadingText || 'Submitting...';
-
-                submitBtn.disabled = true;
-                btnText.textContent = loadingText;
-                btnSpinner.classList.remove('d-none');
-            });
-        });
     </script>
 </body>
 

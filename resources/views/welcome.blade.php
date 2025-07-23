@@ -7,31 +7,31 @@
         :root {
             --bs-primary-rgb: 13, 110, 253;
             --pf: "font-family: " Poppins", sans-serif;";
-            font-weight: 800 !important;
+            font-weight: 400 !important;
             font-style: normal;
         }
 
         .hero-section h2 {
             text-transform: uppercase;
             font-size: 50px;
-            font-weight: 700;
+            font-weight: 400;
         }
 
         .hero-section h2 {
             text-transform: uppercase;
             font-size: 50px;
-            font-weight: 700;
+            font-weight: 400;
         }
 
         .head-h2 {
             text-transform: uppercase;
-            font-weight: 800;
+            font-weight: 400;
             font-size: 30px;
             color: #0d6efd !important;
         }
 
         .cool p {
-            font-weight: 500;
+            font-weight: 400;
         }
 
         .category h2 {
@@ -145,7 +145,7 @@
             font-size: 30px;
             padding: 10px;
             text-transform: uppercase;
-            font-weight: 800;
+            font-weight: 400;
         }
 
         .cta p {
@@ -282,7 +282,7 @@
 
         .main-heading {
             font-size: 3.5rem;
-            font-weight: 700;
+            font-weight: 400;
             line-height: 1.2;
             margin-bottom: 1.5rem;
             color: #1a1a1a;
@@ -399,7 +399,7 @@
 
         .product-title {
             font-size: 0.8rem;
-            font-weight: 600;
+            font-weight: 400;
             margin-top: 10px;
             min-height: 40px;
             display: block;
@@ -434,35 +434,35 @@
         }
 
         /* .cate-stck {
-                            position: sticky;
-                            height: fit-content;
-                            max-height: calc(100vh);
-                            overflow-y: auto;
+                                                        position: sticky;
+                                                        height: fit-content;
+                                                        max-height: calc(100vh);
+                                                        overflow-y: auto;
 
-                        }
+                                                    }
 
-                        .cate-card {
-                            background: #fff;
-                            padding: 10px;
-                            border-radius: 8px;
-                            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
-                            transition: all 0.3s ease;
-                        }
+                                                    .cate-card {
+                                                        background: #fff;
+                                                        padding: 10px;
+                                                        border-radius: 8px;
+                                                        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+                                                        transition: all 0.3s ease;
+                                                    }
 
-                        .cate-card:hover {
-                            transform: translateX(5px);
-                            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-                        }
+                                                    .cate-card:hover {
+                                                        transform: translateX(5px);
+                                                        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+                                                    }
 
-                        .cate-link {
-                            color: #333;
-                            text-decoration: none;
-                            font-weight: 500;
-                        }
+                                                    .cate-link {
+                                                        color: #333;
+                                                        text-decoration: none;
+                                                        font-weight: 500;
+                                                    }
 
-                        .cate-link:hover {
-                            color: #0D6EFD;
-                        } */
+                                                    .cate-link:hover {
+                                                        color: #0D6EFD;
+                                                    } */
 
         .full-screen-carousel img {
 
@@ -474,6 +474,7 @@
             grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
             gap: 24px;
             padding: 20px;
+
         }
 
         .category-card {
@@ -544,10 +545,10 @@
             color: white;
         }
 
-        .rb2 {
-            position: relative;
-            background: #FF6C00 url("{{ asset('public/assets/img/b2b2.webp') }}");
-            background-size: 200px;
+        .hero {
+
+            background: url("{{ asset('public/assets/img/hero.jpg') }}");
+            background-size: cover;
             background-repeat: no-repeat;
             background-position: right;
             height: 35vh;
@@ -565,375 +566,717 @@
         .rb2 a {
             color: white;
         }
+
+
+
+        /* 2nd SECTION */
+
+        .main-container {
+            border: 2px solid #1274c0;
+            border-radius: 20px;
+            box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.1);
+            background: #fff;
+            margin-top: 40px;
+            padding: 40px 30px;
+        }
+
+        .feature-card {
+            border: none;
+            border-radius: 15px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.07);
+            transition: transform 0.2s, box-shadow 0.2s;
+            background: #f8f9fa;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-5px) scale(1.03);
+            box-shadow: 0 6px 24px rgba(0, 0, 0, 0.13);
+        }
+
+        .feature-icon {
+            font-size: 2.2rem;
+            color: #1274c0;
+            margin-bottom: 10px;
+        }
+
+        .section-title {
+            color: #1274c0;
+            font-weight: bold;
+            letter-spacing: 1px;
+        }
+
+        .form-control:focus {
+            border-color: #1274c0;
+            box-shadow: 0 0 0 0.2rem rgba(18, 116, 192, .15);
+        }
+
+        .btn-success {
+            background: #1274c0;
+            border: none;
+        }
+
+        .btn-success:hover {
+            background: #0f5c99;
+        }
+
+        @media (max-width: 767px) {
+            .main-container {
+                padding: 20px 5px;
+            }
+        }
+
+
+        /* 3RD SECTION */
+
+        .main-heading {
+            font-size: 2.1em;
+            font-weight: 400;
+            color: #1f85c7;
+            margin: 24px 0 24px 16px;
+            letter-spacing: 0.5px;
+
+        }
+
+        .section3 {
+            display: flex;
+            min-height: 80vh;
+            box-sizing: border-box;
+            padding: 0 0 32px 0;
+            align-items: flex-start;
+            justify-content: center;
+        }
+
+        .sidebar {
+            width: 340px;
+            margin-right: 28px;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .sidebar-image-wrapper {
+            position: relative;
+            width: 100%;
+            height: 540px;
+            border-radius: 12px;
+            overflow: hidden;
+        }
+
+        .sidebar-image {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+        }
+
+        .sidebar-gradient {
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(to bottom, rgba(0, 0, 0, 0.05) 0%, rgba(0, 0, 0, 0.85) 100%);
+        }
+
+        .sidebar-content {
+            position: absolute;
+            left: 0;
+            bottom: 0;
+            width: 100%;
+            padding: 32px 24px 24px 24px;
+            z-index: 2;
+            color: #fff;
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            font-size: 0.8rem;
+        }
+
+        .sidebar-list {
+            list-style: none;
+            padding: 0;
+            margin: 0 0 24px 0;
+        }
+
+        .sidebar-list li {
+            margin-bottom: 12px;
+            font-size: 1.1em;
+            font-weight: 400;
+            letter-spacing: 0.2px;
+        }
+
+        .view-all-btn {
+            padding: 12px 32px;
+            background: #008060;
+            color: #fff;
+            border: none;
+            border-radius: 6px;
+            font-size: 1.1em;
+            font-weight: 400;
+            cursor: pointer;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.10);
+            transition: background 0.2s;
+        }
+
+        .view-all-btn:hover {
+            background: #005a43;
+            color: white;
+        }
+
+        .main-content {
+            flex: 1;
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 28px;
+            align-content: start;
+            max-width: 1100px;
+        }
+
+        .category-card {
+            background: #fff;
+            border-radius: 10px;
+            box-shadow: 0 1px 4px rgba(0, 0, 0, 0.06);
+            padding: 24px 18px 18px 18px;
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            min-height: 180px;
+            height: 100%;
+            border: 1px solid #ececec;
+        }
+
+        .category-card img {
+            width: 64px;
+            height: 64px;
+            object-fit: contain;
+            margin-bottom: 10px;
+            border-radius: 8px;
+            background: #f3f7f6;
+        }
+
+        .category-title {
+            font-size: 1.13em;
+            font-weight: 800;
+            margin-bottom: 8px;
+            color: #1f85c7;
+        }
+
+        .category-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .category-list li {
+            color: #222;
+            font-size: 0.8rem;
+            margin-bottom: 6px;
+        }
+
+        @media (max-width: 1200px) {
+            .main-content {
+                grid-template-columns: 1fr 1fr;
+                max-width: 800px;
+            }
+        }
+
+        @media (max-width: 900px) {
+            .container {
+                flex-direction: column;
+                align-items: stretch;
+            }
+
+            .sidebar {
+                width: 100%;
+                margin-right: 0;
+                margin-bottom: 24px;
+            }
+
+            .main-content {
+                grid-template-columns: 1fr;
+                max-width: 100%;
+                gap: 18px;
+            }
+        }
+
+
+
+
+
+
+        .category-list a {
+            color: #1f85c7;
+            text-decoration: none;
+            font-size: 1rem;
+        }
+
+        .sidebar-list.sidebar-list a {
+            color: white;
+            text-decoration: none;
+            font-size: 1rem;
+        }
+
+        .category-list li::before {
+            content: '»';
+            color: #1f85c7;
+            text-decoration: none;
+            font-size: 1rem;
+            padding-right: 5px;
+        }
+
+        .sidebar-list li::before {
+            color: white;
+            text-decoration: none;
+            font-size: 1rem;
+            padding-right: 5px;
+        }
+
+
+        /* BRAND  */
+        .brand-carousel .item {
+            text-align: center;
+        }
+
+        .brand-carousel .brand-logo {
+            width: 100px !important;
+            height: auto;
+            object-fit: contain;
+            border-radius: 50%;
+            transition: all 0.3s ease;
+            border: none !important;
+        }
+
+        .brand-carousel .brand-logo:hover {
+            filter: grayscale(100%);
+            transform: scale(1.05);
+        }
+
+
+        /* 8th section */
+
+        .more-section {
+            background: #fff;
+            padding: 40px 20px;
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+        }
+
+        .more-item {
+            text-align: center;
+            padding: 20px;
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            height: 100%;
+        }
+
+        @media (min-width: 768px) {
+            .more-item:not(:nth-child(4n))::after {
+                content: "";
+                position: absolute;
+                top: 10%;
+                right: 0;
+                width: 1px;
+                height: 80%;
+                background-color: #ccc;
+            }
+        }
+
+        @media (max-width: 767.98px) {
+            .more-item:not(:nth-child(2n))::after {
+                content: "";
+                position: absolute;
+                top: 10%;
+                right: 0;
+                width: 1px;
+                height: 80%;
+                background-color: #ccc;
+            }
+        }
+
+        .more-icon {
+            width: 50px;
+            height: 50px;
+            margin-bottom: 15px;
+            object-fit: contain;
+        }
+
+        .more-title {
+            font-weight: 600;
+            margin-bottom: 10px;
+        }
+
+        .more-desc {
+            font-size: 14px;
+            color: #555;
+            min-height: 60px;
+            /* 👈 Fixed height */
+        }
+
+        .more-btn {
+            border: 1px solid #007bff;
+            color: #007bff;
+            padding: 6px 20px;
+            border-radius: 20px;
+            font-size: 14px;
+            margin-top: auto;
+            /* 👈 Push button to bottom */
+            background: none;
+            transition: 0.3s;
+        }
+
+        .more-btn:hover {
+            background-color: #007bff;
+            color: #fff;
+        }
     </style>
 
 
     {{-- HERO SECTION --}}
 
-    {{-- LEFT SECTION --}}
+    <div class="container-fluid hero">
 
-    <div class="container mt-1">
-        <div class="row">
-            <div class="col-md-8">
-                <div class="owl-carousel full-screen-carousel owl-theme">
-                    <div class="item">
-
-                        <img src="{{ asset('public/assets/img/off-4.jpg') }}" alt="Slide 1">
-
-                    </div>
-                    <div class="item">
-
-                        <img src="{{ asset('public/assets/img/banner-4.webp') }}" alt="Slide 1">
-
-                    </div>
-                    <div class="item">
-
-                        <img src="{{ asset('public/assets/img/banner-3.webp') }}" alt="Slide 1">
-
-                    </div>
-                    <div class="item">
-
-                        <img src="{{ asset('public/assets/img/banner-6.webp') }}" alt="Slide 1">
-
-                    </div>
-                    <div class="item">
-
-                        <img src="{{ asset('public/assets/img/banner-5.webp') }}" alt="Slide 1">
-
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-4">
-                <a href="#">
-                    <div class="rb1 mb-1">
-                        <div class="text-content">
-                            <h2>B2B</h2>
-                            <p>Wholesale & Supply</p>
-
-                        </div>
-                    </div>
-                </a>
-                <a href="#">
-                    <div class="rb2">
-                        <div class="text-content">
-                            <h2>REPAIR & <br> SERVICES</h2>
-                            <p>Service Providers</p>
-
-                        </div>
-                    </div>
-                </a>
-            </div>
-        </div>
     </div>
 
 
-
-
-
-
-
-
-
-    {{-- SIDEBAR AND SERVICES --}}
-
-    {{-- <div class="container  p-4 b-0">
-        <div class="row gap-0">
-            <div class="col-md-12 cate-stck">
-                <h2 class="serv-name">CATEGORIES</h2>
-                @foreach ($categories as $category)
-                <div class=" d-flex align-items-center mb-2 ">
-                    <img src="{{ asset('public/images/category/' . $category->image) }}" alt="Category image" width="40"
-                        height="40" class="me-2 rounded">
-                    <a class="cate-link text-truncate" href="{{ route('venders', $category->id) }}"
-                        style="white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">
-                        {{ $category->name }}
-                    </a>
-                </div>
-                @endforeach
-            </div>
-        </div>
-    </div> --}}
-
-    {{-- CATEGOREY --}}
-
-
+    {{-- 2nd Section --}}
     <div class="container">
-        <div class="categories-grid">
-            @foreach ($categories as $category)
-                <div class="category-card">
-                    <img src="{{ asset('public/images/category/' . $category->image) }}" alt="Category image"
-                        class="category-icon">
-                    <a class="cate-link text-truncate" href="{{ route('venders', $category->id) }}"
-                        style="white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">
-                        {{ $category->name }}
-                    </a>
+        <div class="main-container">
+            <div class="row g-4 align-items-center">
+                <!-- Left Section -->
+                <div class="col-lg-5">
+                    <h2 class="fw-bold mb-3">We connect <br><span class="fw-bold text-dark">Buyers & Sellers</span></h2>
+                    <p class="mb-4 text-secondary">IndiaMART is India's largest online B2B marketplace, connecting buyers
+                        with suppliers.</p>
+                    <div class="row g-3">
+                        <div class="col-4">
+                            <div class="feature-card p-3 text-center">
+                                <div class="feature-icon"><i class="fa-solid fa-star"></i></div>
+                                <div class="small fw-semibold">Trusted Platform</div>
+                            </div>
+                        </div>
+                        <div class="col-4">
+                            <div class="feature-card p-3 text-center">
+                                <div class="feature-icon"><i class="fa-solid fa-shield-halved"></i></div>
+                                <div class="small fw-semibold">Safe & Secure</div>
+                            </div>
+                        </div>
+                        <div class="col-4">
+                            <div class="feature-card p-3 text-center">
+                                <div class="feature-icon"><i class="fa-solid fa-headset"></i></div>
+                                <div class="small fw-semibold">Quick Assistance</div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-            @endforeach
+                <!-- Right Section -->
+                <div class="col-lg-7">
+                    <div class="card border-0 shadow-sm rounded-4 p-4">
+                        <div class="text-center mb-3">
+                            <h4 class="section-title">TELL US<br>WHAT YOU NEED</h4>
+                        </div>
+                        <form>
+                            <div class="mb-3">
+                                <input type="text" class="form-control form-control-lg"
+                                    placeholder="Enter Product / Service name">
+                            </div>
+                            <div class="mb-3 input-group input-group-lg">
+                                <span class="input-group-text">+91</span>
+                                <input type="text" class="form-control" placeholder="Enter your mobile">
+                            </div>
+                            <div class="mb-3">
+                                <small class="text-muted">Your Country is <span class="text-primary">India ▼</span></small>
+                            </div>
+                            <button type="submit" class="btn btn-success w-100 mb-4 btn-lg">Submit Requirement</button>
+                        </form>
+                        <div class="row g-3 text-center">
+                            <div class="col-6 col-md-3">
+                                <div class="feature-card p-2">
+                                    <div class="feature-icon"><i class="fa-solid fa-cart-shopping"></i></div>
+                                    <div class="fw-bold small">CONVENIENCE<br>OF BUYING</div>
+                                </div>
+                            </div>
+                            <div class="col-6 col-md-3">
+                                <div class="feature-card p-2">
+                                    <div class="feature-icon"><i class="fa-solid fa-comments-dollar"></i></div>
+                                    <div class="fw-bold small">COMPETITIVE<br>QUOTES</div>
+                                </div>
+                            </div>
+                            <div class="col-6 col-md-3">
+                                <div class="feature-card p-2">
+                                    <div class="feature-icon"><i class="fa-solid fa-hand-holding-dollar"></i></div>
+                                    <div class="fw-bold small">PAYMENT<br>PROTECTION</div>
+                                </div>
+                            </div>
+                            <div class="col-6 col-md-3">
+                                <div class="feature-card p-2">
+                                    <div class="feature-icon"><i class="fa-solid fa-users"></i></div>
+                                    <div class="fw-bold small">5.98 CRORE +<br>BUYERS</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- End Right Section -->
+            </div>
         </div>
     </div>
 
-    <div class="container">
-        <div class="row">
-            <div class="col-md-6" style="border: 0px solid gainsboro; border-radius: 10px;">
-                @foreach ($vendorCategories as $categoryName => $vendors)
-                    <h2 class="serv-name">{{ $categoryName }}</h2>
-                    <div class="owl-carousel education-carousel">
-                        @foreach ($vendors as $vendor)
-                            <div class="item">
-                                <a href="{{ route('venderServices', $vendor->id) }}">
-                                    @if (empty($vendor->image))
-                                        <img src="{{ asset('public/assetss/img/image.png') }}" alt="image"
-                                            height="200" width="150">
-                                    @else
-                                        <img src="{{ asset('public/images/vendor/' . $vendor->image) }}" alt="Image 1"
-                                            height="200" width="150">
-                                    @endif
-                                </a>
-                                <div>
-                                    <a class="product-title"
-                                        href="{{ route('venderServices', $vendor->id) }}">{{ $vendor->business_name }}</a>
-                                </div>
-                                <div class="qsection">
-                                    <span class="experts text-muted">5624 Experts</span>
-                                    <a class="get-qbtn" href="{{ route('venderServices', $vendor->id) }}">GET QUOTES</a>
-                                </div>
-                            </div>
-                        @endforeach
+    {{-- END --}}
+
+
+
+    <style>
+        .ad-placeholder {
+            width: 100%;
+            max-width: 728px;
+            height: 90px;
+            background: #f5f5f5;
+            border: 1px dashed #aaa;
+            text-align: center;
+            line-height: 90px;
+            font-size: 16px;
+            color: #555;
+            margin: 20px auto;
+        }
+
+        @media (max-width: 768px) {
+            .ad-placeholder {
+                height: 250px;
+                max-width: 300px;
+                line-height: 250px;
+            }
+        }
+    </style>
+
+    <div class="ad-placeholder">
+        Ad Space Reserved
+    </div>
+
+    {{-- 4TH SECTION --}}
+
+
+    @forelse ($categories as $mainCategory)
+        <div class="main-heading">{{ $mainCategory->name }}</div>
+        <div class="container section3 py-3">
+            <div class="sidebar">
+                <div class="sidebar-image-wrapper">
+                    <img src="{{ asset('public/images/category/'.$mainCategory->image) }}" alt="{{ $mainCategory->name }}" class="sidebar-image">
+                    <div class="sidebar-gradient"></div>
+                    <div class="sidebar-content">
+                        @if ($mainCategory->children->count())
+                            <ul class="list-unstyled category-list sidebar-list">
+                                @foreach ($mainCategory->children as $subCategory)
+                                    <li><a href="{{ route('productsByCategory', $subCategory->slug) }}">{{ $subCategory->name }}</a></li>
+                                @endforeach
+                            </ul>
+                        @endif
+                        <a href="{{ route('category',$mainCategory->slug) }}" class="view-all-btn">View All</a>
                     </div>
-                @endforeach
+                </div>
             </div>
-            {{-- Right Section --}}
-            <div class="col-md-6" style="border: 0px solid gainsboro; border-radius: 10px;">
-                @foreach ($vendorCategories as $categoryName => $vendors)
-                    <h2 class="serv-name">{{ $categoryName }}</h2>
-                    <div class="owl-carousel education-carousel">
-                        @foreach ($vendors as $vendor)
-                            <div class="item">
-                                <a href="{{ route('venderServices', $vendor->id) }}">
-                                    @if (empty($vendor->image))
-                                        <img src="{{ asset('public/assetss/img/image.png') }}" alt="image"
-                                            height="200" width="150">
-                                    @else
-                                        <img src="{{ asset('public/images/vendor/' . $vendor->image) }}" alt="Image 1"
-                                            height="200" width="150">
-                                    @endif
-                                </a>
-                                <div>
-                                    <a class="product-title"
-                                        href="{{ route('venderServices', $vendor->id) }}">{{ $vendor->business_name }}</a>
-                                </div>
-                                <div class="qsection">
-                                    <span class="experts text-muted">5624 Experts</span>
-                                    <a class="get-qbtn" href="{{ route('venderServices', $vendor->id) }}">GET QUOTES</a>
-                                </div>
-                            </div>
-                        @endforeach
+            <div class="main-content">
+                @if ($mainCategory->children->count())
+                    @foreach ($mainCategory->children as $subCategory)
+                        <div class="category-card">
+                            <img src="{{ asset('public/images/category/'.$subCategory->image) }}"
+                                alt="{{ $subCategory->name }}">
+                            <div class="category-title">{{ $subCategory->name }}</div>
+                            @if ($subCategory->children->count())
+                                <ul class="list-unstyled category-list">
+                                    @foreach ($subCategory->children as $childCategory)
+                                        <li><a href="{{ route('productsByCategory', $childCategory->slug) }}">{{ $childCategory->name }}</a></li>
+                                    @endforeach
+                                </ul>
+                            @endif
+                        </div>
+                    @endforeach
+                @endif
+
+            </div>
+        </div>
+          <div class="ad-placeholder">
+        Ad Space Reserved
+    </div>
+    @empty
+        <div class="container text-center my-5">
+            <p class="text-muted">No categories available at the moment.</p>
+        </div>
+    @endforelse
+
+
+   
+
+    {{-- 6Th Section --}}
+    <div class="container my-5">
+        <div class="row quotes-section align-items-center">
+            <!-- Left Info Section -->
+            <div class="col-lg-6 mb-4 mb-lg-0">
+                <div class="main-heading">Get free quotes from multiple sellers</div>
+                <div class="row text-center">
+                    <div class="col-4 feature">
+                        <img src="https://img.icons8.com/ios/50/paper-plane.png" alt="Tell us">
+                        <div class="feature-title">Tell us what<br><strong>You Need</strong></div>
                     </div>
-                @endforeach
+                    <div class="col-4 feature">
+                        <img src="https://img.icons8.com/ios/50/open-envelope.png" alt="Receive quotes">
+                        <div class="feature-title">Receive free quotes from<br><strong>Sellers</strong></div>
+                    </div>
+                    <div class="col-4 feature">
+                        <img src="https://img.icons8.com/ios/50/handshake.png" alt="Seal the Deal">
+                        <div class="feature-title">Seal the<br><strong>Deal</strong></div>
+                    </div>
+                </div>
             </div>
+
+            <!-- Right Form Section -->
+            <div class="col-lg-6">
+                <div class="form-title">Tell us your Requirement</div>
+                <form>
+                    <div class="mb-3">
+                        <input type="text" class="form-control" placeholder="Enter Product / Service name" required>
+                    </div>
+                    <div class="mb-3 input-group">
+                        <span class="input-group-text">+91</span>
+                        <input type="tel" class="form-control" placeholder="Enter your mobile" required>
+                    </div>
+                    <div class="mb-3">
+                        <select class="form-select" aria-label="Select State" required>
+                            <option selected disabled>Select your state</option>
+                            <option value="Andhra Pradesh">Andhra Pradesh</option>
+                            <option value="Arunachal Pradesh">Arunachal Pradesh</option>
+                            <option value="Assam">Assam</option>
+                            <option value="Bihar">Bihar</option>
+                            <option value="Chhattisgarh">Chhattisgarh</option>
+                            <option value="Goa">Goa</option>
+                            <option value="Gujarat">Gujarat</option>
+                            <option value="Haryana">Haryana</option>
+                            <option value="Himachal Pradesh">Himachal Pradesh</option>
+                            <option value="Jharkhand">Jharkhand</option>
+                            <option value="Karnataka">Karnataka</option>
+                            <option value="Kerala">Kerala</option>
+                            <option value="Madhya Pradesh">Madhya Pradesh</option>
+                            <option value="Maharashtra">Maharashtra</option>
+                            <option value="Manipur">Manipur</option>
+                            <option value="Meghalaya">Meghalaya</option>
+                            <option value="Mizoram">Mizoram</option>
+                            <option value="Nagaland">Nagaland</option>
+                            <option value="Odisha">Odisha</option>
+                            <option value="Punjab">Punjab</option>
+                            <option value="Rajasthan">Rajasthan</option>
+                            <option value="Sikkim">Sikkim</option>
+                            <option value="Tamil Nadu">Tamil Nadu</option>
+                            <option value="Telangana">Telangana</option>
+                            <option value="Tripura">Tripura</option>
+                            <option value="Uttar Pradesh">Uttar Pradesh</option>
+                            <option value="Uttarakhand">Uttarakhand</option>
+                            <option value="West Bengal">West Bengal</option>
+                            <option value="Delhi">Delhi</option>
+                            <option value="Jammu and Kashmir">Jammu and Kashmir</option>
+                            <option value="Ladakh">Ladakh</option>
+                            <option value="Puducherry">Puducherry</option>
+                            <option value="Other">Other</option>
+                        </select>
+                    </div>
+
+                    <button type="submit" class="btn submit-btn bg-success text-white w-100">Submit
+                        Requirement</button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+
+    {{-- 7th Section --}}
+
+
+    {{-- SHOP BY BRAND --}}
+
+    <div class="container-fluid my-5">
+        <div class="d-flex justify-content-between align-items-center mb-3">
+            <div class="main-heading">Explore products from Premium Brands</div>
+            <a href="{{ route('productcat') }}" class="text-primary fw-semibold">View All</a>
+        </div>
+
+        <div class="owl-carousel brand-carousel owl-theme">
+
+            <a href="/brands/apple" class="item">
+                <img src="{{ asset('public/assets/img/brand-1.png') }}" class="img-fluid brand-logo" alt="Apple Logo">
+            </a>
+
+            <a href="/brands/samsung" class="item">
+                <img src="{{ asset('public/assets/img/brand-2.png') }}" class="img-fluid brand-logo"
+                    alt="Samsung Logo">
+            </a>
+
+            <a href="/brands/hp" class="item">
+                <img src="{{ asset('public/assets/img/brand-3.png') }}" class="img-fluid brand-logo" alt="HP Logo">
+            </a>
+
+            <a href="/brands/dell" class="item">
+                <img src="{{ asset('public/assets/img/brand-4.png') }}" class="img-fluid brand-logo" alt="Dell Logo">
+            </a>
+
+            <a href="/brands/lenovo" class="item">
+                <img src="{{ asset('public/assets/img/brand-5.png') }}" class="img-fluid brand-logo" alt="Lenovo Logo">
+            </a>
+
+            <a href="/brands/asus" class="item">
+                <img src="{{ asset('public/assets/img/brand-6.png') }}" class="img-fluid brand-logo" alt="Asus Logo">
+            </a>
+
+            <a href="/brands/asus" class="item">
+                <img src="{{ asset('public/assets/img/brand-7.png') }}" class="img-fluid brand-logo" alt="Asus Logo">
+            </a>
+
+            <a href="/brands/asus" class="item">
+                <img src="{{ asset('public/assets/img/brand-8.png') }}" class="img-fluid brand-logo" alt="Asus Logo">
+            </a>
+
+            <a href="/brands/asus" class="item">
+                <img src="{{ asset('public/assets/img/brand-9.png') }}" class="img-fluid brand-logo" alt="Asus Logo">
+            </a>
+
         </div>
     </div>
 
 
 
 
-    {{-- COOL SECTION --}}
-    <!-- <div class="container-fluid cool mt-5" style="border: 0px solid gainsboro;border-radius: 10px;">
-                            <h2 class="head-h2">Cool Day Essentials</h2>
-                            <p>Discover wide range of winter collection</p>
-                            <div class="owl-carousel recent-carousel">
-                                <div class="item item1">
-                                    <img src="{{ asset('public/assets/img/c1.jpg') }}" alt="Image 1" class="cool-img">
-                                    <div class="de-pro">
-                                        <a class="product-title" href="#">Beauty Parlours</a>
-                                        <a class="explore" href="#">Explore <span>&#8250;</span>
-                                        </a>
-                                    </div>
-                                </div>
-                                <div class="item item1">
-                                    <img src="{{ asset('public/assets/img/c2.jpg') }}" alt="Image 1" class="cool-img">
-                                    <div class="de-pro">
-                                        <a class="product-title" href="#">Beauty Parlours</a>
-                                        <a class="explore" href="#">Explore <span>&#8250;</span> </a>
-                                    </div>
-                                </div>
-                                <div class="item item1">
-                                    <img src="{{ asset('public/assets/img/c3.jpg') }}" alt="Image 1" class="cool-img">
-                                    <div class="de-pro">
-                                        <a class="product-title" href="#">Beauty Parlours</a>
-                                        <a class="explore" href="#">Explore <span>&#8250;</span> </a>
-                                    </div>
-                                </div>
-                                <div class="item item1">
-                                    <img src="{{ asset('public/assets/img/c4.jpg') }}" alt="Image 1" class="cool-img">
-                                    <div class="de-pro">
-                                        <a class="product-title" href="#">Beauty Parlours</a>
-                                        <a class="explore" href="#">Explore <span>&#8250;</span> </a>
-                                    </div>
-                                </div>
-                                <div class="item item1">
-                                    <img src="{{ asset('public/assets/img/c5.jpg') }}" alt="Image 1" class="cool-img">
-                                    <div class="de-pro">
-                                        <a class="product-title" href="#">Beauty Parlours</a>
-                                        <a class="explore" href="#">Explore <span>&#8250;</span> </a>
-                                    </div>
-                                </div>
 
-
-                            </div>
-                        </div> -->
-
-
-
-    {{-- POPULAR SEARCH --}}
-    {{-- <div class="popular-search-section">
-        <h2 class="head-h2">Popular Searches</h2>
-        <div class="owl-carousel popsearch mt-4">
-            @foreach ($categories as $category)
-            <div class="item"><a href="{{ route('venders', $category->id) }}">{{ $category->name }}</a></div>
-            @endforeach
-            <div class="item"><a href="#">T-Shirts</a></div>
-        </div>
-    </div> --}}
-
-    {{-- WHY CHOOSE US SECTION --}}
-    <section class="py-5 bg-light" id="why-choose-us">
-        <div class="container">
-            <div class="row mb-5">
-                <div class="col-lg-8 mx-auto text-center">
-                    <h2 class="head-h2">WHY CHOOSE US?</h2>
-                    <p class="lead text-muted">Hamari services aapke business ko digital duniya mein aage badhane ke liye
-                        best hain!</p>
-                </div>
+    {{-- 8Th Section --}}
+    <div class="container my-5">
+        <div class="main-heading">More For You</div>
+        <div class="row more-section">
+            <div class="col-6 col-md-3 more-item">
+                <img src="https://cdn-icons-png.flaticon.com/128/3649/3649497.png" alt="Verified Sellers"
+                    class="more-icon" />
+                <div class="more-title">Connect with verified sellers</div>
+                <div class="more-desc">Tell us your requirement & let our experts find verified sellers for you</div>
+                <button class="more-btn">Get Verified Sellers</button>
             </div>
-            <div class="row g-4 justify-content-center">
-                <div class="col-md-4 col-lg-4 col-12">
-                    <div class="card h-100 shadow-lg border-0 hover-card">
-                        <div class="card-body text-center p-5">
-                            <div class="icon-circle mb-4 floating-animation">
-                                <i class="bi bi-currency-rupee fs-2 text-primary"></i>
-                            </div>
-                            <h5 class="card-title text-primary">Affordable Pricing</h5>
-                            <p class="card-text">Har business ke budget mein fit, best value for money.</p>
-                        </div>
-                    </div>
+            <div class="col-6 col-md-3 more-item">
+                <img src="https://cdn-icons-png.flaticon.com/128/3222/3222657.png" alt="Sell on IndiaMART"
+                    class="more-icon" />
+                <div class="more-title">Sell on Localbusiness for free</div>
+                <div class="more-desc">Reach out to more than 21+ crore buyers. Sell with us.</div>
+                <button class="more-btn">Start Selling</button>
+            </div>
+            <div class="col-6 col-md-3 more-item">
+                <img src="https://cdn-icons-png.flaticon.com/128/7075/7075369.png" alt="Download App"
+                    class="more-icon" />
+                <div class="more-title">Download our App</div>
+                <div class="more-desc">Get instant notifications on the go. Download our App Now</div>
+                <button class="more-btn">Download Now</button>
+            </div>
+            <div class="col-6 col-md-3 more-item">
+                <img src="https://cdn-icons-png.flaticon.com/128/5579/5579107.png" alt="Tally on Mobile"
+                    class="more-icon" />
+                <div class="more-title">Best Price</div>
+                <div class="more-desc">With Live Keeping, SMEs can now connect their Tally offline data to mobile app
                 </div>
-                <div class="col-md-4 col-lg-4 col-12">
-                    <div class="card h-100 shadow-lg border-0 hover-card">
-                        <div class="card-body text-center p-5">
-                            <div class="icon-circle mb-4 floating-animation">
-                                <i class="bi bi-people-fill fs-2 text-primary"></i>
-                            </div>
-                            <h5 class="card-title text-primary">Expert Team</h5>
-                            <p class="card-text">Experienced developers aur designers, jo aapke business ko samajhte hain.
-                            </p>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-4 col-lg-4 col-12">
-                    <div class="card h-100 shadow-lg border-0 hover-card">
-                        <div class="card-body text-center p-5">
-                            <div class="icon-circle mb-4 floating-animation">
-                                <i class="bi bi-lightning-fill fs-2 text-primary"></i>
-                            </div>
-                            <h5 class="card-title text-primary">Fast Delivery</h5>
-                            <p class="card-text">Time par project completion, bina kisi delay ke.</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-4 col-lg-4 col-12">
-                    <div class="card h-100 shadow-lg border-0 hover-card">
-                        <div class="card-body text-center p-5">
-                            <div class="icon-circle mb-4 floating-animation">
-                                <i class="bi bi-headset fs-2 text-primary"></i>
-                            </div>
-                            <h5 class="card-title text-primary">24/7 Support</h5>
-                            <p class="card-text">Hamesha aapke saath, kisi bhi samasya mein turant madad.</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-4 col-lg-4 col-12">
-                    <div class="card h-100 shadow-lg border-0 hover-card">
-                        <div class="card-body text-center p-5">
-                            <div class="icon-circle mb-4 floating-animation">
-                                <i class="bi bi-gear-fill fs-2 text-primary"></i>
-                            </div>
-                            <h5 class="card-title text-primary">Customized Solutions</h5>
-                            <p class="card-text">Har business ki alag zarurat ke hisaab se solutions.</p>
-                        </div>
-                    </div>
-                </div>
+                <button class="more-btn">Know More</button>
             </div>
         </div>
-    </section>
-
-    {{-- COUNTER SECTION --}}
-
-
-    <section class="hero-section1">
-        <div class="container">
-            <div class="row d-flex align-items-center">
-                <div class="col-lg-6 mt-5">
-                    <div class="left-side">
-                        <!-- Top section with image and stats -->
-                        <div class="top-section">
-                            <!-- Main large image -->
-                            <div class="main-image-container">
-                                <img src="https://mizzle.webestica.com/assets/images/about/02.jpg" alt="Meeting Room"
-                                    class="main-image">
-                            </div>
-
-                            <!-- Stats cards column -->
-                            <div class="stats-column">
-                                <div class="stat-card dark">
-                                    <div class="stat-number">10+</div>
-                                    <div class="stat-text">Years of experience</div>
-                                </div>
-                                <div class="stat-card green">
-                                    <div class="stat-number">1.2K</div>
-                                    <div class="stat-text">Happy customers</div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- Bottom image -->
-                        <div class="bottom-image-container">
-                            <img
-                                src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/2f/Google_2015_logo.svg/640px-Google_2015_logo.svg.png">
-                            <img src="https://reviewthere.com/wp-content/uploads/review-there-logo.png">
-                            <img
-                                src="https://upload.wikimedia.org/wikipedia/commons/thumb/7/78/Trustpilot_Logo_%282022%29.svg/640px-Trustpilot_Logo_%282022%29.svg.png">
-                        </div>
-
-                    </div>
-                </div>
-
-                <div class="col-lg-6">
-                    <div class="content-side">
-                        <span class="badge badge-custom">🎯 Your gateway to digital success</span>
-                        <h1 class="main-heading">Defining the future of online experiences!</h1>
-                        <p class="main-description">Embrace a new era of digital success with Mizzle. Our team combines
-                            cutting-edge design with robust development to deliver websites that captivate and convert.</p>
-
-                        <ul class="feature-list">
-                            <li class="feature-item">
-                                <span class="feature-icon">✓</span>
-                                <span>Emphasis on ROI-driven solutions</span>
-                            </li>
-                            <li class="feature-item">
-                                <span class="feature-icon">✓</span>
-                                <span>Expert team with diverse skill</span>
-                            </li>
-                            <li class="feature-item">
-                                <span class="feature-icon">✓</span>
-                                <span>Proven track record of delivering results</span>
-                            </li>
-                        </ul>
-
-                        <a href="{{ route('about') }}" class="btn btn-discover">Discover more</a>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
+    </div>
 @endsection

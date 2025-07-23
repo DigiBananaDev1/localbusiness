@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Category;
 use Illuminate\Http\Request;
+use Illuminate\Support\Composer;
 use Illuminate\Support\Facades\Log;
 
 class CategoryController extends Controller
@@ -22,73 +23,105 @@ class CategoryController extends Controller
      */
     public function create()
     {
-        return view('admin.category.add');
+        $categories = Category::with('children.children')->whereNull('parent_id')->get();
+
+        foreach ($categories as $main) {
+            $main->depth = 0;
+            foreach ($main->children as $sub) {
+                $sub->depth = 1;
+                foreach ($sub->children as $child) {
+                    $child->depth = 2;
+                }
+            }
+        }
+        return view('admin.category.add', compact('categories'));
     }
 
     /**
      * Store a newly created resource in storage.
      */
+    // public function store(Request $request)
+    // {
+    //     // $request->validate([
+    //     //     'name' => 'required',
+    //     //     'image' => 'required|image|mimes:jpg,jpeg,png,gif,svg|max:2048',
+    //     // ]);
+    //     // $imageName = time() . '.' . $request->image->getClientOriginalExtension();
+    //     // $request->image->move(public_path('images/category'), $imageName);
+
+    //     $categories = [
+    //         ['name' => 'AC Services', 'image' => 'acservice.svg'],
+    //         ['name' => 'Astrologers', 'image' => 'astrologers.svg'],
+    //         ['name' => 'Body Massage Centers', 'image' => 'masseur.svg'],
+    //         ['name' => 'Beauty Spa', 'image' => 'beauty.svg'],
+    //         ['name' => 'Car Hire', 'image' => 'cabcarrental.svg'],
+    //         ['name' => 'Caterers', 'image' => 'caterers.svg'],
+    //         ['name' => 'Chartered Accountant', 'image' => 'charteredaccountants.svg'],
+    //         ['name' => 'Computer Training Institute', 'image' => 'computertraininginstitutes.svg'],
+    //         ['name' => 'Courier Services', 'image' => 'internationalcourierservices.svg'],
+    //         ['name' => 'Computer & Laptop Repair & Services', 'image' => 'computerrepairs.svg'],
+    //         ['name' => 'Car Repair & Services', 'image' => 'carrepairservices.svg'],
+    //         ['name' => 'Dermatologists', 'image' => 'dermatologists.svg'],
+    //         ['name' => 'Dentists', 'image' => 'dentists.svg'],
+    //         ['name' => 'Electricians', 'image' => 'electricians.svg'],
+    //         ['name' => 'Event Organizer', 'image' => 'eventorganizers.svg'],
+    //         ['name' => 'Real Estate', 'image' => 'realestate.svg'],
+    //         ['name' => 'Fabricators', 'image' => 'fabricators.svg'],
+    //         ['name' => 'Furniture Repair Services', 'image' => 'furniture.svg'],
+    //         ['name' => 'House Keeping Services', 'image' => 'housekeeping.svg'],
+    //         ['name' => 'Hobbies', 'image' => 'hobbies.svg'],
+    //         ['name' => 'Interior Designers', 'image' => 'interiordesigners.svg'],
+    //         ['name' => 'Internet Website Designers', 'image' => 'internet.svg'],
+    //         ['name' => 'Jwellery Showrooms', 'image' => 'jewellery.svg'],
+    //         ['name' => 'Lawyers', 'image' => 'lawyers.svg'],
+    //         ['name' => 'Transporters', 'image' => 'transporters.svg'],
+    //         ['name' => 'Photographers', 'image' => 'photographers.svg'],
+    //         ['name' => 'Nursing Services', 'image' => 'nursebureaus.svg'],
+    //         ['name' => 'Printing & Publishing Services', 'image' => 'flexprintingservices.svg'],
+    //         ['name' => 'Placement Services', 'image' => 'jobs.svg'],
+    //         ['name' => 'Pest Control Services', 'image' => 'pestcontrol.svg'],
+    //         ['name' => 'Painting Contractors', 'image' => 'paintingcontractors.svg'],
+    //         ['name' => 'Packers & Movers', 'image' => 'packersandmovers.svg'],
+    //         ['name' => 'Scrap Dealers', 'image' => 'scrap-dealers.svg'],
+    //         ['name' => 'Scrap Buyers', 'image' => 'scrap-dealers.svg'],
+    //         ['name' => 'Registration Consultants', 'image' => 'registrationconsultants.svg'],
+    //         ['name' => 'Security System', 'image' => 'securitycctv.svg'],
+    //         ['name' => 'Coaching', 'image' => 'coaching.svg'],
+    //         ['name' => 'Vocational Training', 'image' => 'traininginstitutes.svg'],
+    //     ];
+    //     Category::insert($categories);
+
+    //     // Category::create([
+    //     //     'name' => $request->name,
+    //     //     'image' => $imageName,
+    //     // ]);
+
+    //     Log::info('Admin Log', ['message' => $request->name . 'Category Created by admin']);
+
+    //     return redirect()->route('admin.category')->with('success', 'Category created successfully');
+    // }
     public function store(Request $request)
     {
-        // $request->validate([
-        //     'name' => 'required',
-        //     'image' => 'required|image|mimes:jpg,jpeg,png,gif,svg|max:2048',
-        // ]);
-        // $imageName = time() . '.' . $request->image->getClientOriginalExtension();
-        // $request->image->move(public_path('images/category'), $imageName);
+        $request->validate([
+            'name' => 'required|string|max:255',
+            'parent_id' => 'nullable|exists:categories,id',
+            'image' => 'required|image|max:2048',
+        ]);
 
-        $categories = [
-            ['name' => 'AC Services', 'image' => 'acservice.svg'],
-            ['name' => 'Astrologers', 'image' => 'astrologers.svg'],
-            ['name' => 'Body Massage Centers', 'image' => 'masseur.svg'],
-            ['name' => 'Beauty Spa', 'image' => 'beauty.svg'],
-            ['name' => 'Car Hire', 'image' => 'cabcarrental.svg'],
-            ['name' => 'Caterers', 'image' => 'caterers.svg'],
-            ['name' => 'Chartered Accountant', 'image' => 'charteredaccountants.svg'],
-            ['name' => 'Computer Training Institute', 'image' => 'computertraininginstitutes.svg'],
-            ['name' => 'Courier Services', 'image' => 'internationalcourierservices.svg'],
-            ['name' => 'Computer & Laptop Repair & Services', 'image' => 'computerrepairs.svg'],
-            ['name' => 'Car Repair & Services', 'image' => 'carrepairservices.svg'],
-            ['name' => 'Dermatologists', 'image' => 'dermatologists.svg'],
-            ['name' => 'Dentists', 'image' => 'dentists.svg'],
-            ['name' => 'Electricians', 'image' => 'electricians.svg'],
-            ['name' => 'Event Organizer', 'image' => 'eventorganizers.svg'],
-            ['name' => 'Real Estate', 'image' => 'realestate.svg'],
-            ['name' => 'Fabricators', 'image' => 'fabricators.svg'],
-            ['name' => 'Furniture Repair Services', 'image' => 'furniture.svg'],
-            ['name' => 'House Keeping Services', 'image' => 'housekeeping.svg'],
-            ['name' => 'Hobbies', 'image' => 'hobbies.svg'],
-            ['name' => 'Interior Designers', 'image' => 'interiordesigners.svg'],
-            ['name' => 'Internet Website Designers', 'image' => 'internet.svg'],
-            ['name' => 'Jwellery Showrooms', 'image' => 'jewellery.svg'],
-            ['name' => 'Lawyers', 'image' => 'lawyers.svg'],
-            ['name' => 'Transporters', 'image' => 'transporters.svg'],
-            ['name' => 'Photographers', 'image' => 'photographers.svg'],
-            ['name' => 'Nursing Services', 'image' => 'nursebureaus.svg'],
-            ['name' => 'Printing & Publishing Services', 'image' => 'flexprintingservices.svg'],
-            ['name' => 'Placement Services', 'image' => 'jobs.svg'],
-            ['name' => 'Pest Control Services', 'image' => 'pestcontrol.svg'],
-            ['name' => 'Painting Contractors', 'image' => 'paintingcontractors.svg'],
-            ['name' => 'Packers & Movers', 'image' => 'packersandmovers.svg'],
-            ['name' => 'Scrap Dealers', 'image' => 'scrap-dealers.svg'],
-            ['name' => 'Scrap Buyers', 'image' => 'scrap-dealers.svg'],
-            ['name' => 'Registration Consultants', 'image' => 'registrationconsultants.svg'],
-            ['name' => 'Security System', 'image' => 'securitycctv.svg'],
-            ['name' => 'Coaching', 'image' => 'coaching.svg'],
-            ['name' => 'Vocational Training', 'image' => 'traininginstitutes.svg'],
-        ];
-        Category::insert($categories);
+        $category = new Category();
+        $category->name = $request->name;
+        $category->parent_id = $request->parent_id;
 
-        // Category::create([
-        //     'name' => $request->name,
-        //     'image' => $imageName,
-        // ]);
+        if ($request->hasFile('image')) {
+            $imageName = time() . '.' . $request->image->getClientOriginalExtension();
+            $request->image->move(public_path('images/category'), $imageName);
+            $category->image = $imageName;
+        }
 
-        Log::info('Admin Log', ['message' => $request->name . 'Category Created by admin']);
+        $category->save();
 
-        return redirect()->route('admin.category')->with('success', 'Category created successfully');
+        return redirect()->route('admin.category')->with('success', 'Category created successfully!');
     }
-
     /**
      * Display the specified resource.
      */
@@ -100,39 +133,87 @@ class CategoryController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
+    // public function edit($id)
+    // {
+    //     $category = Category::find($id);
+    //     return view('admin.category.edit', compact('category'));
+    // }
+
     public function edit($id)
     {
-        $category = Category::find($id);
-        return view('admin.category.edit', compact('category'));
+        $category = Category::findOrFail($id);
+
+        // Load only top-level categories with their nested children
+        $categories = Category::with('children.children')
+            ->whereNull('parent_id')
+            ->where('id', '!=', $category->id) // prevent selecting itself as parent
+            ->get();
+
+        return view('admin.category.edit', compact('category', 'categories'));
     }
+
 
     /**
      * Update the specified resource in storage.
      */
+    // public function update(Request $request, $id)
+    // {
+    //     $request->validate([
+    //         'name' => 'required',
+    //         'image' => 'image|mimes:jpg,jpeg,png,gif,svg|max:2048',
+    //     ]);
+
+    //     $category = Category::find($id);
+    //     if ($request->hasFile('image')) {
+    //         $imageName = time() . '.' . $request->image->getClientOriginalExtension();
+    //         $request->image->move(public_path('images/category'), $imageName);
+    //         $category->update([
+    //             'name' => $request->name,
+    //             'image' => $imageName,
+    //         ]);
+    //     } else {
+    //         $category->update([
+    //             'name' => $request->name,
+    //         ]);
+    //     }
+    //     Log::info('Admin Log', ['message' => $category->name . ' category updated']);
+
+    //     return redirect()->route('admin.category')->with('success', 'Category updated successfully');
+    // }
+
+
+
     public function update(Request $request, $id)
     {
         $request->validate([
-            'name' => 'required',
-            'image' => 'image|mimes:jpg,jpeg,png,gif,svg|max:2048',
+            'name' => 'required|string|max:255',
+            'parent_id' => 'nullable|exists:categories,id',
+            'image' => 'nullable|image|max:2048',
         ]);
 
         $category = Category::find($id);
+        $category->name = $request->name;
+        $category->parent_id = $request->parent_id;
+
         if ($request->hasFile('image')) {
+            // Delete old image
+            $oldImagePath = public_path('images/category/' . $category->image);
+            if ($category->image && file_exists($oldImagePath)) {
+                unlink($oldImagePath);
+            }
+
+            // Upload new image
             $imageName = time() . '.' . $request->image->getClientOriginalExtension();
             $request->image->move(public_path('images/category'), $imageName);
-            $category->update([
-                'name' => $request->name,
-                'image' => $imageName,
-            ]);
-        } else {
-            $category->update([
-                'name' => $request->name,
-            ]);
+            $category->image = $imageName;
         }
-        Log::info('Admin Log', ['message' => $category->name . ' category updated']);
 
-        return redirect()->route('admin.category')->with('success', 'Category updated successfully');
+        $category->save();
+
+        return redirect()->route('admin.category')->with('success', 'Category updated successfully!');
     }
+
+
 
     /**
      * Remove the specified resource from storage.
@@ -145,4 +226,13 @@ class CategoryController extends Controller
         Log::warning('Admin Log', ['message' => $category->name . ' category deleted']);
         return redirect()->route('admin.category')->with('success', 'Category Deleted successfully');
     }
+
+
+
+
+    public function children($id)
+    {
+        return Category::where('parent_id', $id)->get();
+    }
+
 }

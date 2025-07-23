@@ -1,8 +1,7 @@
 <nav class="sb-sidenav accordion sb-sidenav-dark" id="sidenavAccordion">
     <div class="sb-sidenav-menu">
         <div class="nav">
-            <a class="nav-link {{ Request::segment(2) == 'dashboard' ? 'active' : '' }}"
-                href="{{ route('admin.dashboard') }}">
+            <a class="nav-link" href="{{ route('admin.dashboard') }}">
                 <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
                 Dashboard
             </a>
@@ -43,38 +42,32 @@
                     </div>
                 </nav>
             </div> --}}
-            <a class="nav-link {{ Request::segment(2) == 'images' ? 'active' : '' }}" href="{{ route('admin.images.show') }}">
+            <a class="nav-link" href="{{ route('admin.images.show') }}">
                 <div class="sb-nav-link-icon"><i class="fas fa-book-open"></i></div>
                 Image Library
             </a>
-            <a class="nav-link {{ Request::segment(2) == 'queries' ? 'active' : '' }}" href="{{ route('admin.showQueries') }}">
+            <a class="nav-link" href="{{ route('admin.showQueries') }}">
                 <div class="sb-nav-link-icon"><i class="fas fa-book-open"></i></div>
                 Queries
             </a>
-            <a class="nav-link {{ Request::segment(2) == 'vendors' ? 'active' : '' }} " href="{{ route('admin.showVendors') }}">
+            <a class="nav-link" href="{{ route('admin.showVendors') }}">
                 <div class="sb-nav-link-icon"><i class="fas fa-store"></i></div>
                 Vendors
             </a>
-            <a class="nav-link {{ Request::segment(2) == 'category' ? 'active' : '' }}" href="{{ route('admin.category') }}">
+            <a class="nav-link" href="{{ route('admin.category') }}">
                 <div class="sb-nav-link-icon"><i class="fas fa-store"></i></div>
                 Category
             </a>
-            <a class="nav-link {{ Request::segment(2) == 'business-types' ? 'active' : '' }}" href="{{ route('business-types.index') }}">
-                <div class="sb-nav-link-icon"><i class="fas fa-store"></i></div>
-                Business Types
-            </a>
-            <a class="nav-link {{ Request::segment(2) == 'faq' ? 'active' : '' }}" href="{{ route('admin.faq') }}">
+            <a class="nav-link" href="{{ route('admin.faq') }}">
                 <div class="sb-nav-link-icon"><i class="fas fa-store"></i></div>
                 Faq
             </a>
-            <a class="nav-link {{ Request::segment(2) == 'contact-us-queries' ? 'active' : '' }} " href="{{ route('admin.contactUs') }}">
+            <a class="nav-link" href="{{ route('admin.contactUs') }}">
                 <div class="sb-nav-link-icon"><i class="fas fa-store"></i></div>
                 Contact Us Queries
             </a>
         </div>
     </div>
-
-
     <div class="sb-sidenav-footer">
         <div class="small">Logged in as:</div>
         {{ Auth::guard('admin')->user()->name }}

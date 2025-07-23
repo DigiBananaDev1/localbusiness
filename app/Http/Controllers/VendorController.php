@@ -11,6 +11,7 @@ use App\Models\Vendor;
 use Illuminate\Support\Facades\Mail;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Auth;
+use App\Mail\SendOtpMail;
 
 class VendorController extends Controller
 {
@@ -19,11 +20,22 @@ class VendorController extends Controller
     // Send OTP
     public function sendOtp(Request $request)
     {
-
         // Validate the email field
         $request->validate([
             'email' => 'required|email',
+            'mobile' => [
+                'required',
+                'regex:/^(?!([0-9])\1{9}$)[6-9]\d{9}$/'
+            ],
+            'gst_no' => [
+                'required',
+                'regex:/^[0-9]{2}[A-Z]{5}[0-9]{4}[A-Z]{1}[1-9A-Z]{1}Z[0-9A-Z]{1}$/'
+            ],
             // 'password' => 'required|min:8',
+
+        ], [
+            'mobile.regex' => 'Please enter a valid phone number.',
+            'gst_no.regex' => 'The GST number format is invalid. Example: 07ABCDE1234F2Z5',
         ]);
 
         // Check if email exists in the database
@@ -43,6 +55,7 @@ class VendorController extends Controller
 
             $vendor->otp = $otp;
             $vendor->otp_expires_at = $expiresAt;
+
             $vendor->save();
 
             // Send the OTP email (optional)
@@ -51,6 +64,7 @@ class VendorController extends Controller
             // Mail::raw("Your OTP is: $otp", function ($message) use ($request) {
             //     $message->to($request->email)->subject('OTP Verification');
             // });
+            Mail::to($vendor->email)->send(new SendOtpMail($otp, 'register'));
             return back()->with([
                 'success' => 'OTP resent to your email.',
                 'email' => $vendor->email, // Additional parameter
@@ -66,6 +80,8 @@ class VendorController extends Controller
         // $newVendor->password = bcrypt($request->password);
         $newVendor->otp = $otp;
         $newVendor->password = bcrypt($otp);
+        $newVendor->gst_no = $request->gst_no;
+        $newVendor->mobile = $request->mobile;
         $newVendor->otp_expires_at = $expiresAt;
         $newVendor->save();
 
@@ -76,7 +92,7 @@ class VendorController extends Controller
         // Mail::raw("Your OTP is: $otp", function ($message) use ($request) {
         //     $message->to($request->email)->subject('OTP Verification');
         // });
-
+        Mail::to($newVendor->email)->send(new SendOtpMail($otp, 'register'));
         return back()->with([
             'success' => 'OTP sent to your email.',
             'email' => $request->email, // Additional parameter
@@ -259,12 +275,12 @@ class VendorController extends Controller
         $vendor->password = bcrypt($otp);
         $vendor->otp_expires_at = $expiresAt;
         $vendor->save();
-
+        Mail::to($vendor->email)->send(new SendOtpMail($otp, 'login'));
         // Send the OTP email (optional)
-        // Mail::to($vendor->email)->send(new OTPMail($otp));
+        // Mail::to($vendor->email)->send(new OTPMail($otp));   // commented out                    
 
         // Mail::raw("Your OTP is: $otp", function ($message) use ($request) {
-        //     $message->to($request->email)->subject('OTP Verification');
+        //     $message->to($request->email)->subject('OTP Verification');  
         // });
         return back()->with([
             'success' => 'OTP sent to your email.',

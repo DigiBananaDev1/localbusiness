@@ -44,28 +44,63 @@ class Vendor extends Authenticatable
     }
 
 
+
+    public function products()
+    {
+        return $this->hasMany(Product::class);
+    }
+
     protected static function boot()
     {
         parent::boot();
 
-        static::creating(function ($vendor) {
-            if (empty($vendor->slug)) {
-                $vendor->slug = self::generateUniqueSlug($vendor->business_name . " " . $vendor->id);
-            }
-        });
+        // static::creating(function ($vendor) {
+        //     if (empty($vendor->slug)) {
+        //         $vendor->slug = self::generateUniqueSlug($vendor->business_name . " " . $vendor->id);
+        //     }
+        // });
 
         static::updating(function ($vendor) {
-            if ($vendor->isDirty('business_name')) {
-                $vendor->slug = self::generateUniqueSlug($vendor->business_name . " " . $vendor->id);
+            if (empty($vendor->slug) || $vendor->isDirty('business_name')) {
+                $vendor->slug = self::generateUniqueSlug($vendor->business_name);
             }
         });
     }
-
     public static function generateUniqueSlug($name)
     {
         $slug = Str::slug($name);
         $count = self::where('slug', 'LIKE', "{$slug}%")->count();
         return $count > 0 ? "{$slug}-{$count}" : $slug;
     }
+    // protected static function boot()
+    // {
+    //     parent::boot();
+
+    //     static::updating(function ($vendor) {
+    //         // Regenerate slug when vendor updates business name or if slug is null/empty
+    //         if (empty($vendor->slug) || $vendor->isDirty('business_name')) {
+    //             $vendor->slug = self::generateUniqueSlug($vendor->business_name, $vendor->id);
+    //         }
+    //     });
+    // }
+
+    // public static function generateUniqueSlug($name, $ignoreId = null)
+    // {
+    //     $slug = Str::slug($name);
+    //     $originalSlug = $slug;
+    //     $count = 1;
+
+    //     while (
+    //         self::where('slug', $slug)
+    //             ->when($ignoreId, fn($query) => $query->where('id', '!=', $ignoreId))
+    //             ->exists()
+    //     ) {
+    //         $slug = "{$originalSlug}-{$count}";
+    //         $count++;
+    //     }
+
+    //     return $slug;
+    // }
+
 
 }

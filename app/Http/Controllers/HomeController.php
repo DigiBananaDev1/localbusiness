@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Category;
 use App\Models\City;
 use App\Models\Faq;
+use App\Models\Product;
 use App\Models\Review;
 use App\Models\Service;
 use App\Models\Vendor;
@@ -13,12 +14,13 @@ use Illuminate\Http\Request;
 class HomeController extends Controller
 {
     public function index()
-
     {
         // $services = Service::all();
         // $vendors = Vendor::where('status', 1)->get();
         $cities = City::where('status', 1)->get();
-        $categories = Category::all();
+        $categories = Category::whereNull('parent_id')
+            ->with('children')
+            ->get();
         $vendorCategories = Vendor::with('category')
             ->where('status', 1)
             ->get()
@@ -66,12 +68,13 @@ class HomeController extends Controller
         return view('/footer-page');
     }
 
-    public function venderServices($id)
+    public function venderServices($slug)
     {
         // dd($id);
-        $services = Service::with('vendor')->where('vendor_id', $id)->get();
+        $vendor = Vendor::where('slug', $slug)->where('status', 1)->firstOrFail();
+        $services = Service::with('vendor')->where('vendor_id', $vendor->id)->get();
         $categories = Category::all();
-        $reviews = Review::where('vendor_id', $id)
+        $reviews = Review::where('vendor_id', $vendor->id)
             ->with('user')
             ->get();
         $userSum = $reviews->sum('user_id');
@@ -148,4 +151,78 @@ class HomeController extends Controller
     {
         return view('t_and_c');
     }
+    public function vendorsByType($type)
+    {
+        // Support: product, service, or both
+        $vendors = Vendor::whereHas('businessTypes', function ($query) use ($type) {
+            $query->where('name', $type);
+        })->get();
+
+        return view('b2b', compact('vendors', 'type'));
+    }
+
+    public function category($slug)
+    {
+        $mainCategory = Category::where('slug', $slug)->firstOrFail();
+
+        // Load subcategories and their children recursively
+        $mainCategory->load(['children.children']);
+        return view('viewall', compact('mainCategory'));
+    }
+
+    // public function productsByCategory($slug)
+    // {
+    //     $category = Category::where('slug', $slug)->with('children')->firstOrFail();
+
+    //     $categoryIds = $this->getAllCategoryIds($category);
+
+    //     $products = Product::whereIn('category_id', $categoryIds)->get();
+
+    //     return view('productcat', compact('category', 'products'));
+    // }
+
+    public function productsByCategory($slug)
+    {
+        $category = Category::where('slug', $slug)
+            ->with(['children', 'parent'])
+            ->firstOrFail();
+
+        // Get all nested category IDs
+        $categoryIds = $this->getAllCategoryIds($category);
+
+        // Get all products under these categories
+        $products = Product::with('vendor')->whereIn('category_id', $categoryIds)->get();
+
+        // Product count
+        $productCount = $products->count();
+
+        // Optional: Fetch full breadcrumb trail
+        $breadcrumb = $this->getBreadcrumbTrail($category);
+
+        return view('productcat', compact('category', 'products', 'productCount', 'breadcrumb'));
+    }
+
+    private function getAllCategoryIds(Category $category)
+    {
+        $ids = [$category->id];
+
+        foreach ($category->children as $child) {
+            $ids = array_merge($ids, $this->getAllCategoryIds($child));
+        }
+
+        return $ids;
+    }
+
+    private function getBreadcrumbTrail($category)
+    {
+        $trail = [];
+
+        while ($category) {
+            array_unshift($trail, $category);
+            $category = $category->parent;
+        }
+
+        return $trail;
+    }
+
 }

@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\BusinessTypeController;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\ProductController;
 use App\Http\Controllers\QueryController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\VendorController;
@@ -22,6 +23,10 @@ Route::post('/admin', [AdminController::class, 'login'])->name('admin.loginSubmi
 // ABOUT PAGE
 Route::view('about', 'about')->name('about');
 Route::view('b2b', 'b2b')->name('b2b');
+Route::view('productfgh', 'product')->name('product');
+Route::view('productpage', 'productpage')->name('productpage');
+Route::view('productcat', 'productcat')->name('productcat');
+Route::view('viewall', 'viewall')->name('viewall');
 
 Route::middleware('auth.admin')->group(function () {
     Route::get('admin/dashboard', [AdminController::class, 'dashboard'])->name('admin.dashboard');
@@ -73,6 +78,7 @@ Route::middleware('auth.admin')->group(function () {
     Route::put('/admin/business-types/{businessType}', [BusinessTypeController::class, 'update'])->name('business-types.update');
     Route::delete('/admin/business-types/{businessType}', [BusinessTypeController::class, 'destroy'])->name('business-types.destroy');
 
+    Route::get('/admin/categories/{id}/children', [CategoryController::class, 'children'])->name('children.category');
 
 
 
@@ -103,6 +109,22 @@ Route::middleware('auth.vendor')->group(function () {
     Route::get('vendor/services/edit/{service_id}/{vendor_id}', [ServiceController::class, 'edit'])->name('vendor.editServices');
     Route::post('vendor/services/edit/{service_id}', [ServiceController::class, 'update'])->name('vendor.updateServices');
     Route::get('vendor/services/edit/{service_id}', [ServiceController::class, 'destroy'])->name('vendor.deleteServices');
+
+
+
+    //  Products 
+    Route::get('vendor/products/list/{vendor_id}', [ProductController::class, 'index'])->name('vendor.viewproducts');
+    Route::get('vendor/products/create/{vendor_id}', [ProductController::class, 'create'])->name('vendor.createproducts');
+    Route::post('vendor/products/create/{vendor_id}', [ProductController::class, 'store'])->name('vendor.storeproducts');
+    Route::get('vendor/products/edit/{product_id}/{vendor_id}', [ProductController::class, 'edit'])->name('vendor.editproducts');
+    Route::post('vendor/products/edit/{product_id}/{vendor_id}', [ProductController::class, 'update'])->name('vendor.updateproducts');
+    Route::get('vendor/products/delete/{vendor_id}/{product_id}', [ProductController::class, 'destroy'])->name('vendor.deleteproducts');
+    Route::post('/vendor/products/{vendor}/multiple', [ProductController::class, 'storeMultiple'])->name('vendor.storeMultipleProducts');
+
+
+
+
+
 });
 
 // User Routes
@@ -141,3 +163,12 @@ Route::post('/reviews', [ReviewController::class, 'store'])->name('reviews.submi
 Route::post('/search', [HomeController::class, 'search'])->name('search');
 Route::get('/privacy-policy', [HomeController::class, 'privacyPolicy'])->name('privacyPolicy');
 Route::get('/terms-and-conditions', [HomeController::class, 't_and_c'])->name('termsAndConditions');
+
+Route::get('/type/{type}', [HomeController::class, 'vendorsByType'])->name('vendors.byType');
+
+Route::get('categories/{slug}', [HomeController::class, 'category'])->name('category');
+// routes/web.php
+
+Route::get('/category/{slug}', [HomeController::class, 'productsByCategory'])->name('productsByCategory');
+
+
