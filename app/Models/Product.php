@@ -30,6 +30,12 @@ class Product extends Model
         return $this->belongsTo(Category::class);
     }
 
+    public function galleries()
+    {
+        return $this->hasMany(ProductGallery::class);
+    }
+
+
     public static function boot()
     {
         parent::boot();

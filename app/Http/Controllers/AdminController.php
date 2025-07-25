@@ -3,11 +3,15 @@
 namespace App\Http\Controllers;
 
 use App\Imports\BulkUploadVendors;
+use App\Models\Admin;
 use App\Models\AdminActivityLogs;
+use App\Models\BusinessType;
+use App\Models\Category;
 use App\Models\City;
 use App\Models\Help;
 use App\Models\Image;
 use App\Models\Query;
+use App\Models\State;
 use App\Models\Vendor;
 use Carbon\Carbon;
 use Illuminate\Auth\Events\Failed;
@@ -34,6 +38,7 @@ class AdminController extends Controller
         $credentials = $request->only('email', 'password');
 
         if (Auth::guard('admin')->attempt($credentials)) {
+
             return redirect()->route('admin.dashboard');
         }
 
@@ -139,7 +144,7 @@ class AdminController extends Controller
             $vendor->status = 0;
             Log::info('Admin Log', ['message' => 'Vendor ' . $vendor->business_name . ' unverified']);
         }
-        
+
         $city->save();
         $vendor->save();
         return back()->with('success', 'Vendor verified successfully');
@@ -256,16 +261,173 @@ class AdminController extends Controller
         return view('admin.authenticationLogs', ['authenticationLogs' => $authenticationLogs]);
     }
 
-    public function ContactUsQueries(){
+    public function ContactUsQueries()
+    {
         $contactUsQueries = Help::orderBy('created_at', 'desc')->paginate(10);
         return view('admin.contactUsQueries', ['contactUsQueries' => $contactUsQueries]);
     }
 
-    public function AnswerContactUsQuery($slug){
+    public function AnswerContactUsQuery($slug)
+    {
         $contactUsQuery = Help::where('slug', $slug)->first();
         $contactUsQuery->answered = 1;
         $contactUsQuery->save();
         return back()->with('success', 'Query Answered');
     }
+
+
+
+    public function index()
+    {
+        $users = Admin::where('role', '!=', 'admin')->paginate(10);
+
+        return view('admin.users.index', compact('users'));
+    }
+
+    public function create()
+    {
+        return view('admin.users.create');
+    }
+    public function store(Request $request)
+    {
+        $request->validate([
+            'name' => 'required|string|max:255',
+            'email' => 'required|email|unique:admins,email',
+            'password' => 'required|string|min:6|confirmed',
+            // 'role' => 'required|string',
+            'display_role' => 'required|string',
+        ]);
+
+        $admin = new Admin();
+        $admin->name = $request->name;
+        $admin->email = $request->email;
+        $admin->password = Hash::make($request->password);
+        // $admin->role = $request->role;
+        $admin->display_role = $request->display_role;
+        $admin->save();
+
+        Log::info('Admin Log', ['message' => 'New admin user created: ' . $admin->name]);
+        return redirect()->route('admin.users')->with('success', 'User created successfully');
+    }
+
+    public function edit($id)
+    {
+        $user = Admin::findOrFail($id);
+        return view('admin.users.edit', compact('user'));
+    }
+
+    public function update(Request $request, $id)
+    {
+        $request->validate([
+            'name' => 'required|string|max:255',
+            'email' => 'required|email|unique:admins,email,' . $id,
+            'display_role' => 'required|string',
+        ]);
+
+        $admin = Admin::findOrFail($id);
+        $admin->name = $request->name;
+        $admin->email = $request->email;
+        // $admin->role = $request->role;
+        $admin->display_role = $request->display_role;
+
+        $admin->save();
+
+        Log::info('Admin Log', ['message' => 'Admin user updated: ' . $admin->name]);
+        return redirect()->route('admin.users')->with('success', 'User updated successfully');
+    }
+    public function destroy($id)
+    {
+        return view('admin.index');
+    }
+
+
+    // change password for user
+    public function UserupdatePassword(Request $request, $id)
+    {
+        $request->validate([
+            'password' => 'required|min:6|confirmed',
+        ]);
+
+        $user = Admin::findOrFail($id);
+        $user->password = Hash::make($request->password);
+        $user->save();
+
+        Log::info('Admin Log', ['message' => 'User password updated for user ID: ' . $id]);
+        return redirect()->route('admin.users')->with('success', 'User password updated successfully');
+    }
+
+
+    // create Vender all function
+    public function vendorindex()
+    {
+        $vendors = Vendor::orderBy('created_at', 'desc')->paginate(10);
+        return view('admin.vendor.index', ['vendors' => $vendors]);
+    }
+    public function vendorcreate()
+    {
+        $states = State::all();
+        $businessTypes = BusinessType::all();
+        return view('admin.vendor.create', compact('states', 'businessTypes'));
+    }
+    
+    public function vendorstore(Request $request)
+    {
+        $request->validate([
+            'business_name' => 'required|string|max:255',
+            'email' => 'required|email|unique:vendors,email',
+            'phone' => 'required|string|max:15',
+            'city' => 'required|string|max:100',
+            'address' => 'required|string|max:255',
+        ]);
+
+        $vendor = new Vendor();
+        $vendor->business_name = $request->business_name;
+        $vendor->email = $request->email;
+        $vendor->phone = $request->phone;
+        $vendor->city = $request->city;
+        $vendor->address = $request->address;
+        $vendor->status = 0; // default status
+        $vendor->save();
+
+        Log::info('Admin Log', ['message' => 'New vendor created: ' . $vendor->business_name]);
+        return redirect()->route('admin.vendors')->with('success', 'Vendor created successfully');
+    }
+    public function vendoredit($id)
+    {
+        $vendor = Vendor::findOrFail($id);
+        return view('admin.vendor.edit', compact('vendor'));
+    }
+    public function vendorupdate(Request $request, $id)
+    {
+        $request->validate([
+            'business_name' => 'required|string|max:255',
+            'email' => 'required|email|unique:vendors,email,' . $id,
+            'phone' => 'required|string|max:15',
+            'city' => 'required|string|max:100',
+            'address' => 'required|string|max:255',
+        ]);
+        $vendor = Vendor::findOrFail($id);
+        $vendor->business_name = $request->business_name;
+        $vendor->email = $request->email;
+        $vendor->phone = $request->phone;
+        $vendor->city = $request->city;
+        $vendor->address = $request->address;
+        $vendor->save();
+        Log::info('Admin Log', [
+            'message' => 'Vendor updated: ' . $vendor
+                ->business_name
+        ]);
+
+        return redirect()->route('admin.vendors')->with('success', 'Vendor updated successfully');
+    }
+    public function vendordestroy($id)
+    {
+        $vendor = Vendor::findOrFail($id);
+        $vendor->delete();
+        Log::warning('Admin Log', ['message' => 'Vendor deleted: ' . $vendor->business_name]);
+        return redirect()->route('admin.vendors')->with('success', 'Vendor deleted successfully');
+    }
+
+
 
 }

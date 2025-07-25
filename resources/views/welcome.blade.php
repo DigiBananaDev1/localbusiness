@@ -1054,8 +1054,6 @@
     </div>
 
     {{-- 4TH SECTION --}}
-
-
     @forelse ($categories as $mainCategory)
         <div class="main-heading">{{ $mainCategory->name }}</div>
         <div class="container section3 py-3">

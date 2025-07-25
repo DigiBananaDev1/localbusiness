@@ -136,7 +136,7 @@
     <div class="container my-4">
         <nav aria-label="breadcrumb">
             <ol class="breadcrumb">
-                <li class="breadcrumb-item"><a href="#">Home</a></li>
+                <li class="breadcrumb-item"><a href="{{route('home.page')}}">Home</a></li>
                 @foreach ($breadcrumb as $crumb)
                     @if (!$loop->last)
                         <li class="breadcrumb-item">
@@ -164,88 +164,34 @@
             <!-- Left Sidebar -->
             <div class="col-lg-2 mb-4 sticky-top" style="top: 24px; z-index: 2;">
                 <h6>Related Brands</h6>
-                <ul class="list-unstyled related-brands">
-                    <li><a href="{{ route('productcat') }}"><img
-                                src="https://4.imimg.com/data4/KU/LH/GLADMIN-179692/demelan-cream-125x125.jpg"
-                                alt=""> Demelan Cream</a></li>
-                    <li><a href="{{ route('productcat') }}"><img
-                                src="https://4.imimg.com/data4/OK/HG/GLADMIN-180523/tazret-forte-125x125.jpg"
-                                alt=""> Tazret Forte</a></li>
-                    <li><a href="{{ route('productcat') }}"><img
-                                src="https://5.imimg.com/data5/LE/HD/GH/GLADMIN-73467/epilive-tablet-125x125.jpg"
-                                alt=""> Epilive Tablet</a></li>
-                    <li><a href="{{ route('productcat') }}"><img
-                                src="https://4.imimg.com/data4/QL/YT/GLADMIN-178846/ivory-capsules-125x125.jpg"
-                                alt=""> Ivory Capsules</a></li>
-                    <li><a href="{{ route('productcat') }}"><img
-                                src="https://5.imimg.com/data5/GLADMIN/Default/2024/10/462412837/QX/AL/CQ/113452/depakote-divalproex-tablets-500x500-125x125.webp"
-                                alt=""> Glutax Injection</a></li>
-                    <li><a href="{{ route('productcat') }}"><img
-                                src="https://5.imimg.com/data5/LE/HD/GH/GLADMIN-73467/epilive-tablet-125x125.jpg"
-                                alt=""> Depakote Tablets</a></li>
-                    <li><a href="{{ route('productcat') }}"><img
-                                src="https://4.imimg.com/data4/KU/LH/GLADMIN-179692/demelan-cream-125x125.jpg"
-                                alt=""> Demelan Cream</a></li>
-                    <li><a href="{{ route('productcat') }}"><img
-                                src="https://4.imimg.com/data4/OK/HG/GLADMIN-180523/tazret-forte-125x125.jpg"
-                                alt=""> Tazret Forte</a></li>
-                    <li><a href="{{ route('productcat') }}"><img
-                                src="https://5.imimg.com/data5/LE/HD/GH/GLADMIN-73467/epilive-tablet-125x125.jpg"
-                                alt=""> Epilive Tablet</a></li>
-                    <li><a href="{{ route('productcat') }}"><img
-                                src="https://4.imimg.com/data4/QL/YT/GLADMIN-178846/ivory-capsules-125x125.jpg"
-                                alt=""> Ivory Capsules</a></li>
-                    <li><a href="{{ route('productcat') }}"><img
-                                src="https://5.imimg.com/data5/GLADMIN/Default/2024/10/462412837/QX/AL/CQ/113452/depakote-divalproex-tablets-500x500-125x125.webp"
-                                alt=""> Glutax Injection</a></li>
-                    <li><a href="{{ route('productcat') }}"><img
-                                src="https://5.imimg.com/data5/LE/HD/GH/GLADMIN-73467/epilive-tablet-125x125.jpg"
-                                alt=""> Depakote Tablets</a></li>
-                </ul>
+                @if ($relatedVendors->count())
+                    <ul class="list-unstyled related-brands">
 
+                        @foreach ($relatedVendors as $vendor)
+                            <li><a href="{{ route('productcat') }}">
+                                    <img src="{{ asset('public/images/vendor/' . $vendor->image) }}"
+                                        alt="">{{ $vendor->business_name }}</a></li>
+                        @endforeach
+
+
+                    </ul>
+                @endif
                 <div class="d mt-5"></div>
 
-                <h6>Featured Categories</h6>
-                <ul class="list-unstyled related-brands">
-                    <li><a href="{{ route('productcat') }}"><img
-                                src="https://4.imimg.com/data4/KU/LH/GLADMIN-179692/demelan-cream-125x125.jpg"
-                                alt=""> Demelan Cream</a></li>
-                    <li><a href="{{ route('productcat') }}"><img
-                                src="https://4.imimg.com/data4/OK/HG/GLADMIN-180523/tazret-forte-125x125.jpg"
-                                alt=""> Tazret Forte</a></li>
-                    <li><a href="{{ route('productcat') }}"><img
-                                src="https://5.imimg.com/data5/LE/HD/GH/GLADMIN-73467/epilive-tablet-125x125.jpg"
-                                alt=""> Epilive Tablet</a></li>
-                    <li><a href="{{ route('productcat') }}"><img
-                                src="https://4.imimg.com/data4/QL/YT/GLADMIN-178846/ivory-capsules-125x125.jpg"
-                                alt=""> Ivory Capsules</a></li>
-                    <li><a href="{{ route('productcat') }}"><img
-                                src="https://5.imimg.com/data5/GLADMIN/Default/2024/10/462412837/QX/AL/CQ/113452/depakote-divalproex-tablets-500x500-125x125.webp"
-                                alt=""> Glutax Injection</a></li>
-                    <li><a href="{{ route('productcat') }}"><img
-                                src="https://5.imimg.com/data5/LE/HD/GH/GLADMIN-73467/epilive-tablet-125x125.jpg"
-                                alt=""> Depakote Tablets</a></li>
-                    <li><a href="{{ route('productcat') }}"><img
-                                src="https://4.imimg.com/data4/KU/LH/GLADMIN-179692/demelan-cream-125x125.jpg"
-                                alt=""> Demelan Cream</a></li>
-                    <li><a href="{{ route('productcat') }}"><img
-                                src="https://4.imimg.com/data4/OK/HG/GLADMIN-180523/tazret-forte-125x125.jpg"
-                                alt=""> Tazret Forte</a></li>
-                    <li><a href="{{ route('productcat') }}"><img
-                                src="https://5.imimg.com/data5/LE/HD/GH/GLADMIN-73467/epilive-tablet-125x125.jpg"
-                                alt=""> Epilive Tablet</a></li>
-                    <li><a href="{{ route('productcat') }}"><img
-                                src="https://4.imimg.com/data4/QL/YT/GLADMIN-178846/ivory-capsules-125x125.jpg"
-                                alt=""> Ivory Capsules</a></li>
-                    <li><a href="{{ route('productcat') }}"><img
-                                src="https://5.imimg.com/data5/GLADMIN/Default/2024/10/462412837/QX/AL/CQ/113452/depakote-divalproex-tablets-500x500-125x125.webp"
-                                alt=""> Glutax Injection</a></li>
-                    <li><a href="{{ route('productcat') }}"><img
-                                src="https://5.imimg.com/data5/LE/HD/GH/GLADMIN-73467/epilive-tablet-125x125.jpg"
-                                alt=""> Depakote Tablets</a></li>
-                </ul>
+                <h6>Related Categories</h6>
+                @if ($relatedCategories->count())
+                    <ul class="list-unstyled related-brands">
 
 
+                        @foreach ($relatedCategories as $cat)
+                        
+                            <li><a href="{{ route('productsByCategory', $cat->slug) }}"><img
+                                        src="{{asset('public/images/category/' . $cat->image)}}"
+                                        alt="">{{ $cat->name }}</a></li>
+                        @endforeach
+
+                    </ul>
+                @endif
             </div>
             <!-- Center Product Section -->
             <div class="col-lg-7 mb-4 center-scroll" style="height:190vh; overflow-y: auto;">
@@ -269,7 +215,7 @@
                                     alt="{{ $product->name }}">
                                 <div class="card-body">
                                     <div class="product-title-fixed"><a
-                                            href="{{ route('productpage') }}">{{ $product->name }}</a></div>
+                                            href="{{ route('productdetails', $product->slug) }}">{{ $product->name }}</a></div>
                                     <div class="mb-2 fw-bold" style="font-size:1.1rem;">
                                         <span
                                             class="text-muted text-decoration-line-through">₹{{ number_format($product->mrp, 2) }}</span>
@@ -285,11 +231,15 @@
                                         <i class="bi bi-geo-alt"></i>
                                         {{ $product->vendor->city }}{{ $product->vendor->state ? ', ' . $product->vendor->state : '' }}
                                     </div>
-                                    <div class="mb-1 d-flex justify-content-around" style="font-size:0.9rem;">
+                                    <div class="mb-1 d-flex gap-3" style="font-size:0.9rem;">
                                         {{-- <span class="badge bg-light text-dark border me-1">GST</span> --}}
+
                                         @if ($product->vendor->status)
-                                            <span class="badge bg-light text-dark border border-success me-1">Verified
-                                                Exporter</span>
+                                            <span class="badge bg-light text-dark me-1">
+                                                <img src="{{ asset('public/assetss/img/verified.gif') }}" width="18px"
+                                                    alt="">
+                                                Verified
+                                            </span>
                                         @endif
                                         {{-- @if ($product->vendor->created_at)
                                             <span class="badge bg-light text-dark border">Verified {{ $product->vendor->created_at->diffForHumans() }}</span>
@@ -316,8 +266,9 @@
                                             @endphp
 
                                             @if (!empty($label))
-                                                <span class="badge bg-light text-dark border">{{ $label }}</span>
+                                                <span class="badge bg-light">{{ $label }}</span>
                                             @endif
+                                            {{-- <span class="badge bg-light text-dark ">6 mo</span> --}}
                                         @endif
 
                                     </div>
@@ -338,9 +289,6 @@
                                 </div>
                             </div>
                         </div>
-
-
-
                         <!-- Modal -->
                         <div class="modal fade" id="supplierModal{{ $product->id }}" tabindex="-1"
                             aria-labelledby="supplierModal{{ $product->id }}Label" aria-hidden="true">
@@ -387,11 +335,11 @@
                                 </div>
                             </div>
                         </div>
-
-
                     @empty
                         <div class="col-12">
-                            <p>No products found in this category.</p>
+                            <div class="p-3  border border-danger rounded text-center">
+                                <p class="text-danger">No products found in this category.</p>
+                                </div> 
                         </div>
                     @endforelse
 
@@ -410,7 +358,7 @@
                             <small class="text-muted">Seller will contact you on this number</small><br>
                             <small class="text-muted">Your Country is <b>India</b></small>
                             <button type="submit" class="btn btn-primary w-100 mt-2" data-bs-toggle="modal"
-                                data-bs-target="#supplierModal{{ $product->id }}">Submit Requirement</button>
+                                data-bs-target="#supplierModal">Submit Requirement</button>
                         </form>
                     </div>
                 </div>

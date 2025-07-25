@@ -489,4 +489,16 @@ class VendorController extends Controller
         $cities = City::where('state_id', $state->id)->get();
         return response()->json(['cities' => $cities]);
     }
+
+
+
+
+    
+
+
+
+
+
+
+
 }

@@ -214,7 +214,7 @@
             }
         }
 
-        
+
         /* FAQ */
 
 
@@ -255,7 +255,8 @@
             border-radius: 0px !important;
             margin-top: 2rem;
         }
-          /* PREFOOTER */
+
+        /* PREFOOTER */
 
         .category-link {
             color: #333;
@@ -285,7 +286,7 @@
             margin: 2rem 0;
         }
 
-          /* FOOTER */
+        /* FOOTER */
 
         a {
             text-decoration: none;
@@ -489,7 +490,6 @@
             }
 
         }
-
     </style>
 
 </head>
@@ -499,14 +499,15 @@
     {{-- HEADER START --}}
     <nav class="navbar navbar-expand-lg navbar-light bg-white shadow-sm">
         <div class="container-fluid">
-            <a class="navbar-brand fw-bold text-primary d-flex align-items-center" href="{{url('/')}}">
+            <a class="navbar-brand fw-bold text-primary d-flex align-items-center" href="{{ url('/') }}">
 
-                <img src="{{asset('public/assets/img/mlb.png')}}" alt="" width="250px">
+                <img src="{{ asset('public/assets/img/mlb.png') }}" alt="" width="250px">
             </a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
                 data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
                 aria-label="Toggle navigation">
-                <svg width="25px" height="25px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <svg width="25px" height="25px" viewBox="0 0 24 24" fill="none"
+                    xmlns="http://www.w3.org/2000/svg">
                     <path d="M3 12H21M3 6H21M9 18H21" stroke="currentColor" stroke-width="2" stroke-linecap="round"
                         stroke-linejoin="round" />
                 </svg>
@@ -546,7 +547,8 @@
                         </a>
                     </li> --}}
                     <li class="nav-item me-3">
-                        <a href="#" class="nav-link   text-white btn-sm px-3 d-flex align-items-center"><i
+                        <a href="{{ url('/list-your-bussiness') }}"
+                            class="nav-link   text-white btn-sm px-3 d-flex align-items-center"><i
                                 class="fa-solid fa-shop me-2"></i>Selll</a>
                     </li>
 
@@ -558,12 +560,13 @@
 
                     @if (Auth::guard('web')->check())
                         <li class="nav-item dropdown">
-                            <a class="nav-link p-0 d-flex align-items-center" id="navbarDropdown" href="#" role="button"
-                                data-bs-toggle="dropdown" aria-expanded="false">
+                            <a class="nav-link p-0 d-flex align-items-center" id="navbarDropdown" href="#"
+                                role="button" data-bs-toggle="dropdown" aria-expanded="false">
                                 <i class="fa fa-user-circle fs-4 text-primary"></i>
                                 <i class="bi bi-chevron-down ms-2"></i>
                             </a>
-                            <ul class="dropdown-menu dropdown-menu-end shadow-sm border-0" aria-labelledby="navbarDropdown">
+                            <ul class="dropdown-menu dropdown-menu-end shadow-sm border-0"
+                                aria-labelledby="navbarDropdown">
                                 <li>
                                     <a class="dropdown-item d-flex align-items-center"
                                         href="{{ route('showUserQueries', Auth::guard('web')->user()->id) }}">
@@ -575,9 +578,11 @@
                                     <hr class="dropdown-divider">
                                 </li>
                                 <li>
-                                    <form action="{{ route('user.logout') }}" method="POST" style="display: inline;">
+                                    <form action="{{ route('user.logout') }}" method="POST"
+                                        style="display: inline;">
                                         @csrf
-                                        <button type="submit" class="dropdown-item d-flex align-items-center text-danger">
+                                        <button type="submit"
+                                            class="dropdown-item d-flex align-items-center text-danger">
                                             <i class="bi bi-box-arrow-right"></i>
                                             <span class="ms-2">Logout</span>
                                         </button>
@@ -603,15 +608,17 @@
             </div>
         </div>
     </nav>
-{{-- LOGIN MODAL --}}
+    {{-- LOGIN MODAL --}}
     <div>
         <!-- Login Modal -->
-        <div class="modal fade" id="loginModal" tabindex="-1" aria-labelledby="loginModalLabel" aria-hidden="true">
+        <div class="modal fade" id="loginModal" tabindex="-1" aria-labelledby="loginModalLabel"
+            aria-hidden="true">
             <div class="modal-dialog modal-dialog-centered modal-lg"> <!-- modal-lg makes it wider -->
                 <div class="modal-content">
                     <div class="modal-header">
                         <h5 class="modal-title" id="loginModalLabel">Login</h5>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal"
+                            aria-label="Close"></button>
                     </div>
                     <div class="modal-body">
                         <div id="loginFormDiv">
@@ -661,7 +668,8 @@
                 <div class="modal-content">
                     <div class="modal-header">
                         <h5 class="modal-title" id="registerModalLabel">Register</h5>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal"
+                            aria-label="Close"></button>
                     </div>
                     <div class="modal-body">
                         <div id="registerFormDiv">
@@ -671,24 +679,24 @@
 
                                 <div class="form-floating mb-3">
                                     <input class="form-control" id="name" name="name" type="name"
-                                        value="{{old('name')}}" />
+                                        value="{{ old('name') }}" />
                                     <label for="name">Name</label>
                                 </div>
                                 <div class="form-floating mb-3">
                                     <input class="form-control" id="mobile" name="mobile" type="number"
-                                        value="{{old('mobile')}}" />
+                                        value="{{ old('mobile') }}" />
                                     <label for="mobile">Mobile Number</label>
                                     <small class="reg-mobile-error alert alert-danger p-2 d-block mt-2 d-none"></small>
                                 </div>
                                 <div class="form-floating mb-3">
                                     <input class="form-control" id="regEmail" name="email" type="email"
-                                        value="{{old('email')}}" />
+                                        value="{{ old('email') }}" />
                                     <label for="regEmail">Email address</label>
                                     <small class="reg-email-error alert alert-danger p-2 d-block mt-2 d-none"></small>
                                 </div>
                                 <div class="form-floating mb-3 d-none">
                                     <input class="form-control" id="regOtp" name="otp" type="number"
-                                        value="{{old('otp')}}" />
+                                        value="{{ old('otp') }}" />
                                     <label for="regOtp">Otp</label>
                                     @error('otp')
                                         <small class="alert alert-danger p-2 d-block mt-2">{{ $message }}</small>
@@ -726,9 +734,10 @@
                 <div class="col-md-12">
                     <div class="faq-section">
                         <!-- <h3 class="mb-4">Customer</h3> -->
-                        @foreach($faqs as $faq)
+                        @foreach ($faqs as $faq)
                             <div class="faq-item">
-                                <div class="faq-question" data-bs-toggle="collapse" data-bs-target="#faq{{ $faq->id }}">
+                                <div class="faq-question" data-bs-toggle="collapse"
+                                    data-bs-target="#faq{{ $faq->id }}">
                                     {{ $faq->question }}
                                     <i class="fas fa-chevron-down float-end"></i>
                                 </div>
@@ -769,9 +778,9 @@
                     <div class="col-lg-3 col-md-4 col-sm-6 col-6">
                         @foreach ($chunk as $category)
                             <div class="d-flex align-items-center ">
-                                <img src="{{ asset('public/images/category/' . $category->image) }}" alt="Category image"
-                                    width="25" height="25" class="me-2 rounded">
-                                <a href="{{ route('venders', $category['id']) }}" class="category-link">
+                                <img src="{{ asset('public/images/category/' . $category->image) }}"
+                                    alt="Category image" width="25" height="25" class="me-2 rounded">
+                                <a href="{{ route('category', $category->slug) }}" class="category-link">
                                     {{ $category['name'] }}
                                 </a>
                             </div>
@@ -789,7 +798,8 @@
                 <div class="row">
                     <div class="col-lg-4 col-md-6 col-sm-6">
                         <div class="widget company-intro-widget">
-                            <a class="navbar-brand fw-bold text-primary d-flex align-items-center" href="{{url('/')}}">
+                            <a class="navbar-brand fw-bold text-primary d-flex align-items-center"
+                                href="{{ url('/') }}">
 
                                 <P>LOCAL <span>BUSINESS</span></P>
                             </a>
@@ -806,8 +816,10 @@
                         <div class="widget course-links-widget">
                             <h5 class="widget-title">HELPFUL LINKS</h5>
                             <ul class="courses-link-list">
-                                <li><a href="{{ url('/') }}"><i class="fas fa-long-arrow-alt-right"></i>Home</a></li>
-                                <li><a href="{{ route('about') }}"><i class="fas fa-long-arrow-alt-right"></i>About</a>
+                                <li><a href="{{ url('/') }}"><i class="fas fa-long-arrow-alt-right"></i>Home</a>
+                                </li>
+                                <li><a href="{{ route('about') }}"><i
+                                            class="fas fa-long-arrow-alt-right"></i>About</a>
                                 </li>
                                 <li><a href="#faq"><i class="fas fa-long-arrow-alt-right"></i>Faq</a></li>
                                 <li><a href="{{ route('privacyPolicy') }}" target="_blank"><i
@@ -822,14 +834,16 @@
                                 <li>
                                     <div class="small-post-item">
                                         <a href="#" class="post-date">July 18, 2018</a>
-                                        <h6 class="small-post-title"><a href="#">Lorem Ipsum is simply dummy text of the
+                                        <h6 class="small-post-title"><a href="#">Lorem Ipsum is simply dummy
+                                                text of the
                                                 printing.</a></h6>
                                     </div>
                                 </li><!-- small-post-item end -->
                                 <li>
                                     <div class="small-post-item">
                                         <a href="#" class="post-date">July 28, 2018</a>
-                                        <h6 class="small-post-title"><a href="#">Lorem Ipsum is simply dummy text of the
+                                        <h6 class="small-post-title"><a href="#">Lorem Ipsum is simply dummy
+                                                text of the
                                                 printing</a></h6>
                                     </div>
                                 </li><!-- small-post-item end -->
@@ -860,7 +874,8 @@
                     </div>
                     <div class="col-md-6 col-sm-6">
                         <ul class="terms-privacy d-flex justify-content-sm-end justify-content-center">
-                            <li><a href="{{ route('termsAndConditions') }}" target="_blank">Terms & Conditions</a></li>
+                            <li><a href="{{ route('termsAndConditions') }}" target="_blank">Terms & Conditions</a>
+                            </li>
                             <li><a href="{{ route('privacyPolicy') }}" target="_blank">Privacy Policy</a></li>
                         </ul>
                     </div>
@@ -913,12 +928,12 @@
     </div>
 
     <!-- Toaster for messages like success or error  -->
-    @if(session('success'))
+    @if (session('success'))
         @php
             $successMessage = str_replace("'", "\\'", session('success'));
         @endphp
         <script>
-            document.addEventListener('DOMContentLoaded', function () {
+            document.addEventListener('DOMContentLoaded', function() {
                 toastr.success('{!! $successMessage !!}', 'Success', {
                     closeButton: true,
                     progressBar: true,
@@ -931,7 +946,7 @@
             $errorMessage = str_replace("'", "\\'", session('error'));
         @endphp
         <script>
-            document.addEventListener('DOMContentLoaded', function () {
+            document.addEventListener('DOMContentLoaded', function() {
                 toastr.error('{!! $errorMessage !!}', 'Error', {
                     closeButton: true,
                     progressBar: true,
@@ -943,7 +958,7 @@
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous">
-        </script>
+    </script>
     <!-- jQuery -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 
@@ -972,24 +987,24 @@
         }, 3000);
     </script>
     <script>
-        document.getElementById('sendRegOtp').addEventListener('click', function (e) {
+        document.getElementById('sendRegOtp').addEventListener('click', function(e) {
             const regForm = document.getElementById('registerForm');
             const name = regForm.name.value;
             const email = regForm.email.value;
             const mobile = regForm.mobile.value;
 
             fetch("{{ route('user.sendRegOtp') }}", {
-                method: "POST",
-                headers: {
-                    "Content-Type": "application/json",
-                    "X-CSRF-TOKEN": "{{ csrf_token() }}"
-                },
-                body: JSON.stringify({
-                    email: email,
-                    name: name,
-                    mobile: mobile
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json",
+                        "X-CSRF-TOKEN": "{{ csrf_token() }}"
+                    },
+                    body: JSON.stringify({
+                        email: email,
+                        name: name,
+                        mobile: mobile
+                    })
                 })
-            })
                 .then(res => {
                     if (!res.ok) throw res;
                     return res.json();
@@ -1019,7 +1034,7 @@
                 });
         });
 
-        document.getElementById('sendOtp').addEventListener('click', function (e) {
+        document.getElementById('sendOtp').addEventListener('click', function(e) {
             // const loginForm = document.getElementById('loginForm');
 
             //both ways of getting email are correct
@@ -1027,15 +1042,15 @@
             // const email = loginForm.email.value;
 
             fetch("{{ route('user.sendOtp') }}", {
-                method: "POST",
-                headers: {
-                    "Content-Type": "application/json",
-                    "X-CSRF-TOKEN": "{{ csrf_token() }}"
-                },
-                body: JSON.stringify({
-                    email
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json",
+                        "X-CSRF-TOKEN": "{{ csrf_token() }}"
+                    },
+                    body: JSON.stringify({
+                        email
+                    })
                 })
-            })
                 .then(res => {
                     if (!res.ok) throw res;
                     return res.json();
@@ -1057,13 +1072,13 @@
         });
     </script>
     <script>
-        $(function () {
+        $(function() {
             $('[data-toggle="tooltip"]').tooltip();
         });
     </script>
     @if ($errors->any() && session('modal_open'))
         <script>
-            window.onload = function () {
+            window.onload = function() {
                 var registerModal = new bootstrap.Modal(document.getElementById('registerModal'));
                 registerModal.show();
                 document.getElementById('regOtp').parentElement.classList.remove('d-none');
@@ -1110,9 +1125,9 @@
 
         // OWL CAROUSLE
 
-        $(document).ready(function () {
+        $(document).ready(function() {
             $(".full-screen-carousel").owlCarousel({
-                items: 1,            // Number of items per slide
+                items: 1, // Number of items per slide
                 margin: 10,
                 loop: true,
                 nav: true,
@@ -1120,18 +1135,24 @@
                 dots: false,
                 autoplayTimeout: 3000,
                 responsive: {
-                    0: { items: 1 },
-                    576: { items: 1 },
-                    768: { items: 1 }
+                    0: {
+                        items: 1
+                    },
+                    576: {
+                        items: 1
+                    },
+                    768: {
+                        items: 1
+                    }
                 }
             });
         });
 
 
 
-        $(document).ready(function () {
+        $(document).ready(function() {
             $(".top-rank").owlCarousel({
-                items: 6,            // Number of items per slide
+                items: 6, // Number of items per slide
                 margin: 10,
                 loop: true,
                 nav: true,
@@ -1139,15 +1160,21 @@
                 dots: true,
                 autoplayTimeout: 3000,
                 responsive: {
-                    0: { items: 1 },
-                    576: { items: 1 },
-                    768: { items: 6 }
+                    0: {
+                        items: 1
+                    },
+                    576: {
+                        items: 1
+                    },
+                    768: {
+                        items: 6
+                    }
                 }
             });
         });
 
 
-        $(document).ready(function () {
+        $(document).ready(function() {
             $(".brand-carousel").owlCarousel({
                 loop: true,
                 margin: 20,
@@ -1155,17 +1182,43 @@
                 autoplay: true,
                 autoplayTimeout: 2000,
                 responsive: {
-                    0: { items: 2 },
-                    576: { items: 3 },
-                    768: { items: 4 },
-                    992: { items: 5 },
-                    1200: { items: 6 }
+                    0: {
+                        items: 2
+                    },
+                    576: {
+                        items: 3
+                    },
+                    768: {
+                        items: 4
+                    },
+                    992: {
+                        items: 5
+                    },
+                    1200: {
+                        items: 6
+                    }
                 }
             });
         });
+    </script>
 
 
+    {{-- loading Button after Submitting Form --}}
 
+    <script>
+        document.querySelectorAll('.form-with-loader').forEach(form => {
+            form.addEventListener('submit', function() {
+                const submitBtn = form.querySelector('.submit-btn-with-loader');
+                const btnText = submitBtn.querySelector('.btn-text');
+                const btnSpinner = submitBtn.querySelector('.btn-spinner');
+
+                const loadingText = submitBtn.dataset.loadingText || 'Submitting...';
+
+                submitBtn.disabled = true;
+                btnText.textContent = loadingText;
+                btnSpinner.classList.remove('d-none');
+            });
+        });
     </script>
 </body>
 

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Category;
 use App\Models\Product;
+use App\Models\ProductGallery;
 use App\Models\Service;
 use App\Models\Vendor;
 use Illuminate\Http\Request;
@@ -12,26 +13,11 @@ use Maatwebsite\Excel\Facades\Excel;
 
 class ProductController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
-    // public function index($vendor_id)
-    // {
-    //     $vendor = Vendor::where('id', $vendor_id)
-    //         ->with('category')
-    //         ->first();
-
-
-
-    //     $products = Product::where('vendor_id', $vendor_id)->get();
-
-
-    //     return view('vendor.viewServices', compact('vendor', 'products'));
-    // }
+  
     public function index($vendor_id)
     {
         $vendor = Vendor::with('products.category')->findOrFail($vendor_id);
-        $products = $vendor->products()->with('category')->latest()->get();
+        $products = $vendor->products()->with('category', 'galleries')->latest()->get();
 
         return view('vendor.product.index', compact('products', 'vendor'));
     }
@@ -64,41 +50,6 @@ class ProductController extends Controller
         $vendor = Vendor::where('id', $vendor_id)->with('category')->first();
         return view('vendor.service.bulkServices', ['vendor' => $vendor]);
     }
-
-    /**
-     * Store a newly created resource in storage.
-     */
-    // public function store(Request $request, $vendor_id)
-    // {
-    //     $request->validate([
-    //         'name' => 'required',
-    //         'mrp' => 'required',
-    //         'description' => 'required',
-    //         'image' => 'required|image|mimes:jpg,jpeg,png,gif,svg|max:2048',
-    //         'search_tags' => 'required',
-    //     ]);
-
-    //     // Store the image
-    //     if ($request->hasFile('image')) {
-    //         $image = $request->file('image');
-    //         $imageName = time() . '_' . 'upload' . '.' . $image->getClientOriginalExtension();
-    //         $ImageWithpath = $image->storeAs('uploads', $imageName, 'public'); // Save to storage/app/public/upload
-    //     }
-    //     // dd($request->all(), $ImageWithpath);
-
-    //     $service = new Service();
-    //     $service->name = $request->name;
-    //     $service->image = $ImageWithpath;
-    //     // $service->path = $path;
-    //     $service->mrp = $request->mrp;
-    //     $service->description = $request->description;
-    //     $service->search_tags = $request->search_tags;
-    //     $service->vendor_id = $vendor_id;
-    //     $service->save();
-    //     return redirect()->route('vendor.viewProduct', $vendor_id)->with('success', 'Service Added Successfully');
-    // }
-
-
 
     public function store(Request $request, $vendor_id)
     {
@@ -183,21 +134,6 @@ class ProductController extends Controller
         //
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
-    // public function edit($service_id, $vendor_id)
-    // {
-    //     $vendor = Vendor::where('id', $vendor_id)
-    //         ->with('category')
-    //         ->first();
-    //     $service = Service::find($service_id);
-    //     return view('vendor.service.editServices', compact('service', 'vendor'));
-    // }
-
-    // /**
-    //  * Update the specified resource in storage.
-    //  */
     // public function update(Request $request, $service_id)
     // {
 
@@ -233,7 +169,8 @@ class ProductController extends Controller
     public function edit($vendor_id, $product_id)
     {
         $vendor = Vendor::findOrFail($vendor_id);
-        $product = Product::where('vendor_id', $vendor_id)->findOrFail($product_id);
+        $product = Product::with('galleries')->where('vendor_id', $vendor_id)->findOrFail($product_id);
+
         $categories = Category::with('children.children')
             ->whereNull('parent_id')
             ->where('id', '!=', $product->category_id) // prevent selecting itself as parent
@@ -243,6 +180,48 @@ class ProductController extends Controller
     }
 
     // Update Logic
+    // public function update(Request $request, $product_id, $vendor_id)
+    // {
+    //     $request->validate([
+    //         'name' => 'required|string|max:255',
+    //         'mrp' => 'nullable|numeric',
+    //         'price' => 'required|numeric',
+    //         'bunch' => 'nullable|numeric',
+    //         'category_id' => 'required|exists:categories,id',
+    //         'description' => 'required|string',
+    //         'search_tags' => 'nullable|string',
+    //         'image' => 'nullable|image|mimes:jpeg,png,jpg|max:2048',
+    //     ]);
+
+    //     $product = Product::where('vendor_id', $vendor_id)->findOrFail($product_id);
+
+    //     $product->name = $request->name;
+    //     $product->mrp = $request->mrp;
+    //     $product->price = $request->price;
+    //     $product->bunch = $request->bunch;
+    //     $product->category_id = $request->category_id;
+    //     $product->description = $request->description;
+    //     $product->search_tags = $request->search_tags;
+
+    //     // Handle image update
+    //     if ($request->hasFile('image')) {
+    //         $image = $request->file('image');
+    //         $imageName = time() . '_' . $image->getClientOriginalName();
+    //         $destinationPath = public_path('products');
+
+    //         if (!file_exists($destinationPath)) {
+    //             mkdir($destinationPath, 0755, true);
+    //         }
+
+    //         $image->move($destinationPath, $imageName);
+    //         $product->image = 'products/' . $imageName;
+    //     }
+
+    //     $product->save();
+
+    //     return redirect()->route('vendor.viewproducts', $vendor_id)->with('success', 'Product updated successfully!');
+    // }
+
     public function update(Request $request, $product_id, $vendor_id)
     {
         $request->validate([
@@ -254,6 +233,7 @@ class ProductController extends Controller
             'description' => 'required|string',
             'search_tags' => 'nullable|string',
             'image' => 'nullable|image|mimes:jpeg,png,jpg|max:2048',
+            'gallery.*' => 'nullable|image|mimes:jpeg,png,jpg|max:2048', // validation for gallery images
         ]);
 
         $product = Product::where('vendor_id', $vendor_id)->findOrFail($product_id);
@@ -266,7 +246,7 @@ class ProductController extends Controller
         $product->description = $request->description;
         $product->search_tags = $request->search_tags;
 
-        // Handle image update
+        // Handle main product image update
         if ($request->hasFile('image')) {
             $image = $request->file('image');
             $imageName = time() . '_' . $image->getClientOriginalName();
@@ -282,10 +262,28 @@ class ProductController extends Controller
 
         $product->save();
 
+        // Handle new gallery images upload
+        if ($request->hasFile('gallery')) {
+            foreach ($request->file('gallery') as $galleryImage) {
+                $galleryName = time() . '_' . $galleryImage->getClientOriginalName();
+                $galleryDestination = public_path('product-gallery');
+
+                if (!file_exists($galleryDestination)) {
+                    mkdir($galleryDestination, 0755, true);
+                }
+
+                $galleryImage->move($galleryDestination, $galleryName);
+
+                // Save in DB
+                ProductGallery::create([
+                    'product_id' => $product->id,
+                    'image_path' => 'product-gallery/' . $galleryName,
+                ]);
+            }
+        }
+
         return redirect()->route('vendor.viewproducts', $vendor_id)->with('success', 'Product updated successfully!');
     }
-
-
     /**
      * Remove the specified resource from storage.
      */
@@ -306,18 +304,79 @@ class ProductController extends Controller
 
 
 
+    // public function storeMultiple(Request $request, $vendor_id)
+    // {
+    //     $request->validate([
+    //         'products.*.name' => 'required|string|max:255',
+    //         'products.*.description' => 'required|string',
+    //         'products.*.price' => 'required|numeric',
+    //         'products.*.mrp' => 'required|numeric',
+    //         'products.*.image' => 'required|image|mimes:jpeg,png,jpg,gif,webp|max:2048',
+    //         'products.*.gallery' => 'required|image|mimes:jpeg,png,jpg,gif,webp|max:2048',
+    //         'products.*.category_id' => 'required|exists:categories,id',
+    //         'products.*.search_tags' => 'nullable|string',
+    //         'products.*.bunch' => 'required|numeric',
+
+    //     ]);
+
+    //     foreach ($request->products as $index => $data) {
+    //         $product = new Product();
+    //         $product->vendor_id = $vendor_id;
+    //         $product->name = $data['name'];
+    //         $product->description = $data['description'];
+    //         $product->price = $data['price'];
+    //         $product->mrp = $data['mrp'] ?? null;
+    //         $product->bunch = $data['bunch'] ?? null;
+    //         $product->category_id = $data['category_id'];
+    //         $product->search_tags = $data['search_tags'] ?? null;
+    //         $product->slug = Str::slug($data['name']);
+
+    //         // Handle image upload (using move)
+    //         if (isset($data['image'])) {
+    //             $image = $data['image'];
+    //             $imageName = time() . '_' . uniqid() . '.' . $image->getClientOriginalExtension();
+    //             $image->move(public_path('products'), $imageName);
+    //             $product->image = 'products/' . $imageName;
+    //         }
+
+    //         $product->save();
+
+    //         // Save gallery images
+    //         if ($request->hasFile("products.$index.gallery")) {
+    //             foreach ($request->file("products.$index.gallery") as $galleryImage) {
+    //                 $galleryName = time() . '_' . $galleryImage->getClientOriginalName();
+    //                 $galleryImage->move(public_path('product-gallery'), $galleryName);
+
+    //                 // Save each image path in product_gallery table or JSON in product table
+    //                 $product->galleries()->create([
+    //                     'image_path' => 'product-gallery/' . $galleryName,
+    //                 ]);
+    //             }
+    //         }
+
+    //     }
+
+    //     return redirect()->route('vendor.viewproducts', $vendor_id)->with('success', 'Products added successfully!');
+    // }
+
+
+
+
+
+
     public function storeMultiple(Request $request, $vendor_id)
     {
-        $request->validate([
+        $validatedData = $request->validate([
+            'products' => 'required|array|min:1',
             'products.*.name' => 'required|string|max:255',
             'products.*.description' => 'required|string',
             'products.*.price' => 'required|numeric',
             'products.*.mrp' => 'required|numeric',
-            'products.*.image' => 'required|image|mimes:jpeg,png,jpg,gif,webp|max:2048',
+            'products.*.bunch' => 'required|numeric',
             'products.*.category_id' => 'required|exists:categories,id',
             'products.*.search_tags' => 'nullable|string',
-            'products.*.bunch' => 'required|numeric',
-
+            'products.*.image' => 'required|image|mimes:jpeg,png,jpg,gif,webp|max:2048',
+            'products.*.gallery.*' => 'nullable|image|max:2048', // Allow multiple gallery images
         ]);
 
         foreach ($request->products as $index => $data) {
@@ -326,13 +385,13 @@ class ProductController extends Controller
             $product->name = $data['name'];
             $product->description = $data['description'];
             $product->price = $data['price'];
-            $product->mrp = $data['mrp'] ?? null;
-            $product->bunch = $data['bunch'] ?? null;
+            $product->mrp = $data['mrp'];
+            $product->bunch = $data['bunch'];
             $product->category_id = $data['category_id'];
             $product->search_tags = $data['search_tags'] ?? null;
-            $product->slug = Str::slug($data['name']);
+            $product->slug = Str::slug($data['name'] . '-' . uniqid());
 
-            // Handle image upload (using move)
+            // Handle main image
             if (isset($data['image'])) {
                 $image = $data['image'];
                 $imageName = time() . '_' . uniqid() . '.' . $image->getClientOriginalExtension();
@@ -341,11 +400,32 @@ class ProductController extends Controller
             }
 
             $product->save();
+
+            // Handle multiple gallery images
+            if ($request->hasFile("products.$index.gallery")) {
+                foreach ($request->file("products.$index.gallery") as $galleryImage) {
+                    $galleryName = time() . '_' . uniqid() . '.' . $galleryImage->getClientOriginalExtension();
+                    $galleryImage->move(public_path('product-gallery'), $galleryName);
+
+                    $product->galleries()->create([
+                        'image_path' => 'product-gallery/' . $galleryName,
+                    ]);
+                }
+            }
         }
 
         return redirect()->route('vendor.viewproducts', $vendor_id)->with('success', 'Products added successfully!');
     }
 
+    public function deleteGallery($id)
+    {
+        $gallery = ProductGallery::findOrFail($id);
+        if (file_exists(public_path($gallery->image_path))) {
+            unlink(public_path($gallery->image_path));
+        }
+        $gallery->delete();
+        return back()->with('success', 'Gallery image deleted successfully.');
+    }
 
 
 }

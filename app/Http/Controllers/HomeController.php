@@ -181,26 +181,112 @@ class HomeController extends Controller
     //     return view('productcat', compact('category', 'products'));
     // }
 
+    //    public function productsByCategory($slug)
+// {
+//     // 1. Get the main category with its hierarchy
+//     $category = Category::where('slug', $slug)
+//         ->with(['children', 'parent'])
+//         ->firstOrFail();
+
+    //     // 2. Get all nested category IDs
+//     $categoryIds = $this->getAllCategoryIds($category);
+
+    //     // 3. Get all products in these categories
+//     $products = Product::with('vendor')->whereIn('category_id', $categoryIds)->get();
+
+    //     // 4. Product count
+//     $productCount = $products->count();
+
+    //     // 5. Related vendors (unique vendors from products)
+//     $relatedVendors = $products->pluck('vendor')->unique('id')->values();
+
+    //     // 6. Related categories:
+//     //    a. Categories used by products
+//     $fromProducts = Category::whereIn('id', $products->pluck('category_id')->unique())->get();
+
+    //     //    b. Children (subcategories) of current category
+//     $fromChildren = $category->children;
+
+    //     //    c. Sibling categories (same parent)
+//     $fromSiblings = Category::where('parent_id', $category->parent_id)
+//         ->where('id', '!=', $category->id)
+//         ->get();
+
+    //     //    d. Merge all into one unique collection
+//     $relatedCategories = $fromProducts
+//         ->merge($fromChildren)
+//         ->merge($fromSiblings)
+//         ->unique('id')
+//         ->values();
+
+    //     // 7. Optional breadcrumb
+//     $breadcrumb = $this->getBreadcrumbTrail($category); 
+
+    //     return view('productcat', compact(
+//         'category',
+//         'products',
+//         'productCount',
+//         'breadcrumb',
+//         'relatedVendors',
+//         'relatedCategories'
+//     ));
+// }
+
+
     public function productsByCategory($slug)
     {
+        // 1. Get the main category with its hierarchy
         $category = Category::where('slug', $slug)
             ->with(['children', 'parent'])
             ->firstOrFail();
 
-        // Get all nested category IDs
+        // 2. Get all nested category IDs
         $categoryIds = $this->getAllCategoryIds($category);
 
-        // Get all products under these categories
+        // 3. Get all products in these categories (with vendors)
         $products = Product::with('vendor')->whereIn('category_id', $categoryIds)->get();
 
-        // Product count
+        // 4. Product count
         $productCount = $products->count();
 
-        // Optional: Fetch full breadcrumb trail
+        // 5. Identify the current vendor (e.g., from the first product)
+        $currentVendor = $products->first()?->vendor;
+
+        // 6. Related vendors (excluding current)
+        $relatedVendors = $products->pluck('vendor')
+            ->unique('id')
+            ->filter(function ($vendor) use ($currentVendor) {
+                return $currentVendor && $vendor->id !== $currentVendor->id;
+            })
+            ->values();
+
+        // 7. Related categories
+        $fromProducts = Category::whereIn('id', $products->pluck('category_id')->unique())->get();
+        $fromChildren = $category->children;
+        $fromSiblings = Category::where('parent_id', $category->parent_id)
+            ->where('id', '!=', $category->id)
+            ->get();
+
+        $relatedCategories = $fromProducts
+            ->merge($fromChildren)
+            ->merge($fromSiblings)
+            ->unique('id')
+            ->values();
+
+        // 8. Breadcrumbs
         $breadcrumb = $this->getBreadcrumbTrail($category);
 
-        return view('productcat', compact('category', 'products', 'productCount', 'breadcrumb'));
+        // 9. Return to view
+        return view('productcat', compact(
+            'category',
+            'products',
+            'productCount',
+            'breadcrumb',
+            'relatedVendors',
+            'relatedCategories'
+        ));
     }
+
 
     private function getAllCategoryIds(Category $category)
     {
@@ -223,6 +309,22 @@ class HomeController extends Controller
         }
 
         return $trail;
+    }
+
+
+
+    public function productdetails($slug)
+    {
+        $product = Product::where('slug', $slug)->with(['galleries', 'vendor'])->firstOrFail();
+
+        // Get related products (same category)
+        $relatedProducts = Product::where('category_id', $product->category_id)
+            ->where('id', '!=', $product->id)
+            ->with('galleries')
+            ->take(4)
+            ->get();
+
+        return view('productdetails', compact('product', 'relatedProducts'));
     }
 
 }

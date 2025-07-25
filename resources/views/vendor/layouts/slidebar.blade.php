@@ -13,31 +13,62 @@
                 Dashboard
             </a>
             @php
-            $userCategory = Auth::guard('vendor')->user()->categories;
+                // dd(vars: $loggedInVendor->businessTypes);
+                $vendorUser = Auth::guard('vendor')->user();
             @endphp
             @if (Auth::guard('vendor')->user()->status == 1)
-            <a class="nav-link collapsed"
-                href="{{ route('vendor.viewServices', ['vendor_id' => Auth::guard('vendor')->user()->id]) }}">
-                <div class="sb-nav-link-icon"><i class="fas fa-cube"></i></div>
-               Service / Product
-            </a>
-            <a class="nav-link collapsed"
-                href="{{ route('vendor.showQueries', ['vendor_id' => Auth::guard('vendor')->user()->id]) }}">
-                <div class="sb-nav-link-icon"><i class="fas fa-book-open"></i></div>
-                Queries
-            </a>
-            @else
-            <a class="nav-link collapsed disabled-link"
-                href="{{ route('vendor.viewServices', ['vendor_id' => Auth::guard('vendor')->user()->id]) }}">
-                <div class="sb-nav-link-icon"><i class="fas fa-cube"></i></div>
-                Service / Product
-            </a>
 
-            <a class="nav-link collapsed disabled-link"
-                href="{{ route('vendor.showQueries', ['vendor_id' => Auth::guard('vendor')->user()->id]) }}">
-                <div class="sb-nav-link-icon"><i class="fas fa-book-open"></i></div>
-                Queries
-            </a>
+                @forelse ($loggedInVendor->businessTypes as $businessType)
+                    {{-- {{ $businessType->name }} --}}
+                    @if ($businessType->name == 'service')
+                        <a class="nav-link collapsed"
+                            href="{{ route('vendor.viewServices', ['vendor_id' => Auth::guard('vendor')->user()->id]) }}">
+                            <div class="sb-nav-link-icon"><i class="fas fa-cube"></i></div>
+                            Service
+                        </a>
+                    @elseif ($businessType->name == 'product')
+                        <a class="nav-link collapsed"
+                            href="{{ route('vendor.viewproducts', ['vendor_id' => Auth::guard('vendor')->user()->id]) }}">
+                           
+                            <div class="sb-nav-link-icon"><i class="fas fa-cube"></i></div>
+                            Product
+                        </a>
+                    @elseif ($businessType->name == 'product' && $businessType->name == 'service')
+                        <a class="nav-link collapsed"
+                            href="{{ route('vendor.viewServices', ['vendor_id' => Auth::guard('vendor')->user()->id]) }}">
+                            <div class="sb-nav-link-icon"><i class="fas fa-cube"></i></div>
+                            Service
+                        </a>
+                        <a class="nav-link collapsed"
+                            href="{{ route('vendor.viewServices', ['vendor_id' => Auth::guard('vendor')->user()->id]) }}">
+                            <div class="sb-nav-link-icon"><i class="fas fa-cube"></i></div>
+                            Product
+                        </a>
+                    @endif
+                @empty
+                @endforelse
+                <a class="nav-link collapsed"
+                    href="{{ route('vendor.viewServices', ['vendor_id' => Auth::guard('vendor')->user()->id]) }}">
+                    <div class="sb-nav-link-icon"><i class="fas fa-cube"></i></div>
+                    Service / Product
+                </a>
+                <a class="nav-link collapsed"
+                    href="{{ route('vendor.showQueries', ['vendor_id' => Auth::guard('vendor')->user()->id]) }}">
+                    <div class="sb-nav-link-icon"><i class="fas fa-book-open"></i></div>
+                    Queries
+                </a>
+            @else
+                <a class="nav-link collapsed disabled-link"
+                    href="{{ route('vendor.viewServices', ['vendor_id' => Auth::guard('vendor')->user()->id]) }}">
+                    <div class="sb-nav-link-icon"><i class="fas fa-cube"></i></div>
+                    Service / Product
+                </a>
+
+                <a class="nav-link collapsed disabled-link"
+                    href="{{ route('vendor.showQueries', ['vendor_id' => Auth::guard('vendor')->user()->id]) }}">
+                    <div class="sb-nav-link-icon"><i class="fas fa-book-open"></i></div>
+                    Queries
+                </a>
             @endif
         </div>
     </div>

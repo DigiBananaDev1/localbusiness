@@ -28,12 +28,12 @@ Route::view('productpage', 'productpage')->name('productpage');
 Route::view('productcat', 'productcat')->name('productcat');
 Route::view('viewall', 'viewall')->name('viewall');
 
-Route::middleware('auth.admin')->group(function () {
+Route::middleware('auth.admin', 'history')->group(function () {
     Route::get('admin/dashboard', [AdminController::class, 'dashboard'])->name('admin.dashboard');
     Route::get('admin/queries', [QueryController::class, 'showQueries'])->name('admin.showQueries');
     Route::get('admin/queries/forward/{query_id}', [QueryController::class, 'forwardQuery'])->name('admin.forwardQuery');
     Route::delete('admin/queries/{query_id}', [QueryController::class, 'destroy'])->name('admin.deleteQuery');
-    Route::get('admin/vendors', [AdminController::class, 'showVendors'])->name('admin.showVendors');
+    Route::get('admin/vendors/show', [AdminController::class, 'showVendors'])->name('admin.showVendors');
     Route::get('admin/add-vendors-bulk', [AdminController::class, 'addBulkVendors'])->name('admin.addVendors.bulk');
     Route::post('admin/add-vendors-bulk', [AdminController::class, 'storeBulkVendors'])->name('admin.storeVendors.bulk');
     Route::get('admin/vendor/verify/{vendor_id}', [AdminController::class, 'verifyVendor'])->name('admin.verifyVendor');
@@ -80,6 +80,24 @@ Route::middleware('auth.admin')->group(function () {
 
     Route::get('/admin/categories/{id}/children', [CategoryController::class, 'children'])->name('children.category');
 
+    // User Routes
+    Route::get('/admin/users', [AdminController::class, 'index'])->name('admin.users');
+    Route::get('/admin/users/create', [AdminController::class, 'create'])->name('admin.users.create');
+    Route::post('/admin/users/store', [AdminController::class, 'store'])->name('admin.users.store');
+    Route::get('/admin/users/edit/{id}', [AdminController::class, 'edit'])->name('admin.users.edit');
+    Route::post('/admin/users/update/{id}', [AdminController::class, 'update'])->name('admin.users.update');
+    Route::delete('/admin/users/delete/{id}', [AdminController::class, 'destroy'])->name('admin.users.destroy');
+    // Route::get('/admin/users/{id}/change-password', [AdminController::class,'changePassword'])->name('admin.users.changePassword');
+    Route::post('/admin/users/{id}/change-password', [AdminController::class, 'UserupdatePassword'])->name('admin.users.updatePassword');
+
+
+    // Vendor Routes
+    Route::get('/admin/vendors', [AdminController::class, 'vendorindex'])->name('admin.vendors');
+    Route::get('/admin/vendors/create', [AdminController::class, 'vendorcreate'])->name('admin.vendors.create');
+    Route::post('/admin/vendors/store', [AdminController::class, 'vendorstore'])->name('admin.vendors.store');
+    Route::get('/admin/vendors/edit/{id}', [AdminController::class, 'vendoredit'])->name('admin.vendors.edit');
+    Route::post('/admin/vendors/update/{id}', [AdminController::class, 'vendorupdate'])->name('admin.vendors.update');
+    Route::delete('/admin/vendors/delete/{id}', [AdminController::class, 'vendordestroy'])->name('admin.vendors.destroy');
 
 
 });
@@ -120,6 +138,9 @@ Route::middleware('auth.vendor')->group(function () {
     Route::post('vendor/products/edit/{product_id}/{vendor_id}', [ProductController::class, 'update'])->name('vendor.updateproducts');
     Route::get('vendor/products/delete/{vendor_id}/{product_id}', [ProductController::class, 'destroy'])->name('vendor.deleteproducts');
     Route::post('/vendor/products/{vendor}/multiple', [ProductController::class, 'storeMultiple'])->name('vendor.storeMultipleProducts');
+
+    Route::delete('/vendor/gallery/{id}', [ProductController::class, 'deleteGallery'])->name('vendor.gallery.delete');
+
 
 
 
@@ -170,5 +191,6 @@ Route::get('categories/{slug}', [HomeController::class, 'category'])->name('cate
 // routes/web.php
 
 Route::get('/category/{slug}', [HomeController::class, 'productsByCategory'])->name('productsByCategory');
+Route::get('/product/{slug}', [HomeController::class, 'productdetails'])->name('productdetails');
 
 
